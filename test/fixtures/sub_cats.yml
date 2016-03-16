@@ -1,9 +1,28 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  category_id: 
+beef:
+  id: 1
+  name: beef
+  category_id: 1
 
-two:
-  name: MyString
-  category_id: 
+pork:
+  id: 2
+  name: pork
+  category_id: 1
+
+duck:
+  id: 3
+  name: duck
+  category_id: 1
+
+
+apple:
+  id: 4
+  name: apple
+  category_id: 2
+
+
+pear:
+  id: 5
+  name: pear
+  category_id: 2

@@ -48,6 +48,8 @@ GEM
     coffee-script-source (1.10.0)
     erubis (2.7.0)
     execjs (2.6.0)
+    has_secure_token (1.0.0)
+      activerecord (>= 3.0)
     hike (1.2.3)
     i18n (0.7.0)
     jbuilder (1.5.3)
@@ -68,7 +70,7 @@ GEM
     mimemagic (0.3.0)
     minitest (5.8.4)
     multi_json (1.11.2)
-    mysql2 (0.4.3-x86-mingw32)
+    mysql2 (0.3.19-x86-mingw32)
     paperclip (4.3.5)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
@@ -141,10 +143,11 @@ DEPENDENCIES
   aws-sdk
   cocaine
   coffee-rails (~> 4.0.0)
+  has_secure_token
   jbuilder (~> 1.2)
   jquery-fileupload-rails
   jquery-rails
-  mysql2
+  mysql2 (~> 0.3.18)
   paperclip
   paypal-sdk-merchant
   rails (= 4.1.8)

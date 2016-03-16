@@ -1,0 +1,10 @@
+class OrderStatus
+
+  NEW = 'NEW'
+  ACCEPTED = 'ACCEPTED'
+  PAYABLE = 'PAYABLE'
+  COMPLETED = 'COMPLETED'
+
+
+
+end

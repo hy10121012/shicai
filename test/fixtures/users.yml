@@ -1,23 +1,39 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  email: MyString
-  pw: MyString
-  phone: 
-  address1: MyString
-  address2: MyString
-  postcode: 
-  city_id: 
-  type: false
+buyer_user:
+  id: 1
+  name: test1
+  email: test1@test.com
+  pw: test1_pw
+  phone:  1234567
+  address1: address1
+  address2: address2
+  postcode: test post
+  city_id:  1
+  user_type: 1
 
-two:
-  name: MyString
-  email: MyString
-  pw: MyString
-  phone: 
-  address1: MyString
-  address2: MyString
-  postcode: 
-  city_id: 
-  type: false
+buyer_user2:
+  id: 3
+  name: test3
+  email: test2@test.com
+  pw: test3_pw
+  phone:  1234567
+  address1: address1
+  address2: address2
+  postcode: test post
+  city_id:  1
+  user_type: 1
+
+
+
+seller_user:
+  id: 10
+  name: test2
+  email: test2@test.com
+  pw: test2_pw
+  phone:  1234567
+  address1: address1
+  address2: address2
+  postcode: test post
+  city_id:  1
+  user_type: 2

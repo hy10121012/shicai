@@ -4,12 +4,12 @@ class CreateUsers < ActiveRecord::Migration
       t.string :name
       t.string :email
       t.string :pw
-      t.number :phone
+      t.integer :phone
       t.string :address1
       t.string :address2
-      t.number :postcode
+      t.integer :postcode
       t.references :city, index: true
-      t.boolean :type
+      t.boolean :user_type
 
       t.timestamps
     end
