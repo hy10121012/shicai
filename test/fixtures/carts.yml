@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  item_id: 
+  quantity: 1
+  delivery_date_time: 1
+
+two:
+  user_id: 
+  item_id: 
+  quantity: 1
+  delivery_date_time: 1

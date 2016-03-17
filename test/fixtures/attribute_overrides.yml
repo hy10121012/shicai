@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  scope: MyString
+  attr_value: MyString
+  attr_entity_id: 1
+  start_date: 1
+  end_date: 1
+  comment: MyText
+
+two:
+  type: 
+  scope: MyString
+  attr_value: MyString
+  attr_entity_id: 1
+  start_date: 1
+  end_date: 1
+  comment: MyText

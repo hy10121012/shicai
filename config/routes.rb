@@ -1,5 +1,59 @@
 Rails.application.routes.draw do
   namespace :api do
+  namespace :buyer do
+    get 'account_management/find_orders_by_status'
+    end
+  end
+
+  namespace :api do
+  namespace :buyer do
+    get 'account_management/find_order_count_summary'
+    end
+  end
+
+  namespace :api do
+  namespace :buyer do
+    get 'account_management/find_user_addresses'
+    end
+  end
+
+  namespace :api do
+  namespace :buyer do
+    get 'management/find_favor_sellers'
+    end
+  end
+
+  namespace :api do
+  namespace :buyer do
+    get 'management/find_favor_items'
+    end
+  end
+
+  namespace :api do
+  namespace :buyer do
+    get 'management/find_frequent_item'
+    end
+  end
+
+  namespace :api do
+  namespace :buyer do
+    get 'management/remove_favor_seller'
+    end
+  end
+
+  namespace :api do
+  namespace :buyer do
+    get 'management/remove_favor_item'
+    end
+  end
+
+  namespace :api do
+  namespace :buyer do
+    get 'cart/find_current_cart_list'
+    end
+  end
+
+  namespace :api do
   namespace :seller do
     get 'fiance_management/find_finance_summary'
     end

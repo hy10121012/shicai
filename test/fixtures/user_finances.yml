@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  overall_revenue: 1
+  monthly_revenue: 1
+  payable: 1
+  user_id: 
+
+two:
+  overall_revenue: 1
+  monthly_revenue: 1
+  payable: 1
+  user_id: 

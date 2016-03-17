@@ -1,0 +1,44 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+beef_1:
+  id: 1
+  name: beef_1
+  price: 3.5
+  description: description
+  user_id: 10
+  sub_cat_id: 1
+  payment_id: 1
+  brand_id: 
+
+beef_2:
+  id: 2
+  name: beef_2
+  price:   4.5
+  description: description2
+  user_id:  10
+  sub_cat_id: 1
+  payment_id: 
+  brand_id:
+
+pork_1:
+  id: 3
+  name: pork_1
+  price:   4.5
+  description: description_pork_1
+  user_id: 10
+  sub_cat_id: 2
+  payment_id: 1
+  brand_id:
+
+
+
+apple_1:
+  id: 4
+  name: apple_1
+  price:   4.5
+  description: description_apple_1
+  user_id: 10
+  sub_cat_id: 4
+  payment_id: 1
+  brand_id:
+
