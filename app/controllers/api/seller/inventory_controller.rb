@@ -1,7 +1,7 @@
-class Api::Seller::HomeController < ApplicationController
+class Api::Seller::InventoryController < ApplicationController
 
   def find_selling_items
-    user_id = params[:user_id]
+    user_id = session[:user_id]
     items =Item.where("user_id = ?", user_id)
     return_map = {}
 
@@ -20,8 +20,9 @@ class Api::Seller::HomeController < ApplicationController
   end
 
   def find_selling_cats
-    user_id = params[:user_id]
-    Category.find_seller_category user_id
+    user_id = session[:user_id]
+    cats = Category.find_seller_category user_id
+    render json: cats
   end
 
 

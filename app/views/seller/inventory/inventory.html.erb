@@ -1,0 +1,22 @@
+<div ng-controller="inventoryCtrl">
+  <div ng-repeat ="cat in cats">
+    {{cat.name}}
+  </div>
+  <div ng-repeat ="(cat_name, sub_cats) in item_cats">
+    <div>
+     {{cat_name}}
+      <ul ng-repeat="item in sub_cats">
+        <li>{{item.name}}</li>  <a href="/pricing/{{item.sub_cat_id}}">change price</a>
+      </ul>
+    </div>
+
+  </div>
+
+
+
+
+</div>
+
+
+<%= session['user_id'] %> <br>
+<%= session['user_type'] %>

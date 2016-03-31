@@ -1,14 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="mainApp">
 <head>
   <title>Shicai</title>
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta charset="UTF-8">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag params[:controller], "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
+  <%= javascript_tag "var AUTH_TOKEN = '#{form_authenticity_token}';" if protect_against_forgery? %>
 </head>
 <body>
-
 <%= yield %>
+ <ul>
+   <li><a href="/inventories">inventories</a> </li>
+   <li><a href="/orders">orders</a> </li>
+   <li><a href="/customers">customers</a> </li>
+   <li><a href="/fin_states">financial status</a> </li>
+   <li><a href="/messages">messages</a> </li>
 
+ </ul>
 </body>
 </html>

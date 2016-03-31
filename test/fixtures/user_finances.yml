@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  overall_revenue: 1
-  monthly_revenue: 1
-  payable: 1
-  user_id: 
+  overall_revenue: 11230000
+  monthly_revenue: 30000
+  payable: 5000
+  user_id: 1
 
 two:
-  overall_revenue: 1
-  monthly_revenue: 1
-  payable: 1
-  user_id: 
+  overall_revenue:  11230000
+  monthly_revenue: 11230000
+  payable: 5000
+  user_id: 10

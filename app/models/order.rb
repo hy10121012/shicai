@@ -15,4 +15,14 @@ class Order < ActiveRecord::Base
     amount['amount']
   end
 
+  def self.find_order_count_by_status user_id, status
+    rs = find_by_sql ["select count(id) count from orders where buyer_user_id=? and status=?",user_id,status]
+    rs[0]['count']
+  end
+
+  def self.find_tmr_order user_id, date
+    find_by_sql ["select * from orders where delivery_date_time =? and user_id=?",date,user_id]
+  end
+
+
 end

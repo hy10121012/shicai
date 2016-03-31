@@ -3,7 +3,28 @@
 meat:
   id: 1
   name: meat
+  weight: 9
 
 fruit:
   id: 2
   name: fruit
+  weight: 7
+
+
+cat3:
+  id: 3
+  name: cat3
+  weight: 6
+
+
+fruit4:
+  id: 4
+  name: fruit4
+  weight: 5
+
+
+fruit5:
+  id: 5
+  name: fruit5
+  weight: 5
+

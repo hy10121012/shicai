@@ -11,7 +11,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160316224129) do
+ActiveRecord::Schema.define(version: 20160328201503) do
+
+  create_table "addresses", force: true do |t|
+    t.integer  "user_id"
+    t.string   "address1"
+    t.string   "address2"
+    t.string   "district"
+    t.string   "city"
+    t.string   "provence"
+    t.integer  "postcode"
+    t.boolean  "is_default"
+    t.integer  "telephone"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "addresses", ["user_id"], name: "index_addresses_on_user_id", using: :btree
+
+  create_table "api_buyer_carts", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "item_id"
+    t.integer  "quantity"
+    t.integer  "delivery_date_time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "api_buyer_carts", ["item_id"], name: "index_api_buyer_carts_on_item_id", using: :btree
+  add_index "api_buyer_carts", ["user_id"], name: "index_api_buyer_carts_on_user_id", using: :btree
 
   create_table "attribute_overrides", force: true do |t|
     t.string   "type"
@@ -31,10 +59,23 @@ ActiveRecord::Schema.define(version: 20160316224129) do
     t.datetime "updated_at"
   end
 
+  create_table "carts", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "item_id"
+    t.integer  "quantity"
+    t.integer  "delivery_date_time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "carts", ["item_id"], name: "index_carts_on_item_id", using: :btree
+  add_index "carts", ["user_id"], name: "index_carts_on_user_id", using: :btree
+
   create_table "categories", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "weight"
   end
 
   create_table "cities", force: true do |t|
@@ -45,6 +86,27 @@ ActiveRecord::Schema.define(version: 20160316224129) do
   end
 
   add_index "cities", ["province_id"], name: "index_cities_on_province_id", using: :btree
+
+  create_table "conversation_texts", force: true do |t|
+    t.integer  "conversation_id"
+    t.text     "content"
+    t.boolean  "is_user_a_deleted"
+    t.boolean  "is_user_b_deleted"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
+  add_index "conversation_texts", ["conversation_id"], name: "index_conversation_texts_on_conversation_id", using: :btree
+
+  create_table "conversations", force: true do |t|
+    t.integer  "user_a_id"
+    t.integer  "user_b_id"
+    t.boolean  "is_user_a_unread"
+    t.boolean  "is_user_b_unread"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "districts", force: true do |t|
     t.string   "name"
@@ -61,6 +123,17 @@ ActiveRecord::Schema.define(version: 20160316224129) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "item_pictures", force: true do |t|
+    t.integer  "item_id"
+    t.string   "picture_l_url"
+    t.string   "picture_s_url"
+    t.boolean  "is_profile"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "item_pictures", ["item_id"], name: "index_item_pictures_on_item_id", using: :btree
 
   create_table "items", force: true do |t|
     t.string   "name"
@@ -141,15 +214,16 @@ ActiveRecord::Schema.define(version: 20160316224129) do
     t.string   "name"
     t.string   "email"
     t.string   "pw"
-    t.integer  "phone"
+    t.string   "phone"
     t.string   "address1"
     t.string   "address2"
     t.integer  "postcode"
     t.integer  "city_id"
-    t.boolean  "user_type"
+    t.integer  "user_type"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "token"
+    t.boolean  "is_verified"
   end
 
   add_index "users", ["city_id"], name: "index_users_on_city_id", using: :btree

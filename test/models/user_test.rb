@@ -4,39 +4,33 @@ class UserTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
-  def setup
-    @user = User.new
-    @ori_pw =  "test123"
-    @user.pw = Digest::MD5.hexdigest(@ori_pw)
-    @user.email="ser@email.com"
-    @user.phone= "123456"
-    @user.user_type=1
-    @user.address1="add test3"
-    @user.save
-  end
 
-  def teardown
-    @user = nil
+  test "authentication with phone" do
+    user = users(:buyer_user2)
+    token = User.get_user_login(user.phone,'12345')
+    assert token.token == user.token
   end
 
   test "authentication with email" do
-    token = User.get_user_login_token(@user.email,@ori_pw)
-    assert token != false &&   !token.nil?
-  end
-
-  test "authentication with phone" do
-    token = User.get_user_login_token(@user.phone,@ori_pw)
-    assert token != false &&   !token.nil?
+    user = users(:buyer_user2)
+    token = User.get_user_login(user.email,'12345')
+    assert token.token == user.token
   end
 
   test "failed login" do
-    token = User.get_user_login_token(@user.phone,"123wrong")
+    user = users(:buyer_user2)
+
+    token = User.get_user_login(user.phone,"123wrong")
     assert token == false
   end
 
   test "found no user" do
-    token = User.get_user_login_token("wrong_user",@ori_pw)
+    user = users(:buyer_user2)
+
+    token = User.get_user_login("wrong_user",user.pw)
     assert token.nil?
   end
+
+
 
 end

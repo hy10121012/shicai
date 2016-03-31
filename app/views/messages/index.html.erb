@@ -1,0 +1,12 @@
+<div ng-controller="msgCtrl">
+  <div ng-repeat="conv in conversations">
+    <div ng-if="conv.user_a_id == <%=session[:user_id]%>">
+      <a href="/conversation/{{conv.id}}">{{conv.user_b_id}}  | {{conv.updated_at}}</a>
+    </div>
+    <div ng-if="conv.user_b_id == <%=session[:user_id]%>">
+      <a href="/conversation/{{conv.id}}">{{conv.user_a_id}}  | {{conv.updated_at}}</a>
+    </div>
+  </div>
+
+
+</div>

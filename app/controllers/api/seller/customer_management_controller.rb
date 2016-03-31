@@ -1,12 +1,12 @@
 class Api::Seller::CustomerManagementController < ApplicationController
-  def find_customer
-    user_id = params[:user_id]
+  def find_customers
+    user_id = session[:user_id]
     summaries = Order.find_customer_summary_by_user_id user_id
     render json: summaries
   end
 
-  def find_customer_detail
-    customer_user_id = params[:customer_id]
+  def find_customer_details
+    customer_user_id = params[:user_id]
     user = User.find_by id: customer_user_id
 
     render json: user

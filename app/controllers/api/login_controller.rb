@@ -8,14 +8,20 @@ class Api::LoginController < ApplicationController
   end
 
   def do_login_action
-    user_id = params[:user][:id]
-    pwd = params[:user][:pw]
-    token = User.get_user_login_token(user_id,pwd)
+    user_id = params[:name]
+    pwd = params[:pwd]
+    user = User.get_user_login(user_id,pwd)
+    token = nil
     status="success"
-    if token.nil?
+    if user.nil?
       status="no_found"
-    elsif token==false
+    elsif user==false
       status="failed"
+    else
+      puts 'login success'
+      session[:user_id]=user.id
+      session[:user_type] = user.user_type
+      token = user.token
     end
     result = {"status"=>status,"token"=>token}
     render json: result
@@ -30,8 +36,24 @@ class Api::LoginController < ApplicationController
 
   end
 
+  def do_create_user
+    phone=params[:phone].to_s
+    email = params[:email]
+    pwd = params[:pw].to_s
+    type = params[:user_type]
 
-  private def send_recover_email(email)
+    user = User.create(phone:phone,email:email,pw:Digest::MD5.hexdigest(pwd),user_type:type,is_verified:false)
+    if user.save
+      render text: true
+    else
+      render text: false
+    end
+
+  end
+
+
+
+  def send_recover_email(email)
 
   end
 

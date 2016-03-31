@@ -8,7 +8,7 @@ class Api::Seller::HomeControllerTest < ActionController::TestCase
 
   test "find all item by user and cat by cat" do
     user = users(:seller_user)
-    get :find_selling_items, {'user_id' => user.id}
+    get :find_selling_items, nil,{'user_id' => user.id}
     assert_response :success
     body = JSON.parse(response.body)
     assert body['meat'].size ==3

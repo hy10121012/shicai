@@ -5,7 +5,7 @@ class Api::Seller::OrderManagementControllerTest < ActionController::TestCase
     get :find_all_orders,{'user_id'=>10}
     assert_response :success
     body = JSON.parse(response.body)
-    assert body['NEW'].size ==2
+    assert body['NEW'].size ==3
     assert body['ACCEPTED'].size ==1
 
   end
@@ -14,7 +14,7 @@ class Api::Seller::OrderManagementControllerTest < ActionController::TestCase
     get :find_orders_by_type ,{'user_id'=>10,'status'=>OrderStatus::NEW}
     assert_response :success
     body = JSON.parse(response.body)
-    assert body.size==2
+    assert body.size==3
   end
 
   test "should get order_detail" do
@@ -35,6 +35,20 @@ class Api::Seller::OrderManagementControllerTest < ActionController::TestCase
     assert_response :success
     body = JSON.parse(response.body)
     assert body.size==2
+  end
+
+  test "this should return tmr order_" do
+    get :find_tmr_orders,{'date'=>'20160326'},{'user_id'=>'10'}
+    assert_response :success
+    body = JSON.parse(response.body)
+    assert body.size==4
+  end
+
+  test "this should return tmr order" do
+    get :find_tmr_orders,nil,{'user_id'=>'10'}
+    assert_response :success
+    body = JSON.parse(response.body)
+    assert body.size==0
   end
 
 end

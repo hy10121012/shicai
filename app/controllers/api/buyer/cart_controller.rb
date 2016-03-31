@@ -13,7 +13,7 @@ class Api::Buyer::CartController < ApplicationController
     #从购物车内删除货品
   end
 
-  def make_order
+  def create_order
     #下单
   end
 

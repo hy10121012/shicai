@@ -12,5 +12,12 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
-//= require_tree .
+
+//= require angular.min
+
+
+var add_csrf = function(data){
+    data['authenticity_token'] =AUTH_TOKEN
+}
+
+

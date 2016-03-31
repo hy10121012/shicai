@@ -20,12 +20,12 @@ class Api::Seller::PriceController < ApplicationController
 
     items.each do |item|
       item.price = (item.price*(1+rate)).round(2)
+      item.save
     end
-    items.save
   end
 
   def find_cat_item_prices
-    user_id = params[:user_id]
+    user_id = session[:user_id]
     sub_cat_id = params[:sub_cat_id]
     items = Item.find_items_by_user_sub_cat user_id,sub_cat_id
     render json: items

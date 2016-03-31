@@ -9,12 +9,12 @@ class Api::Seller::PriceControllerTest < ActionController::TestCase
   end
 
   test "should get do_batch_pricing" do
-    get :do_batch_pricing
+    get :do_batch_pricing ,{'sub_cat_id'=>1},{'user_id'=>10}
     assert_response :success
   end
 
   test "should get get_cat_item_price" do
-    get :get_cat_item_price
+    get :find_cat_item_prices ,{'sub_cat_id'=>1},{'user_id'=>'10'}
     assert_response :success
   end
 
