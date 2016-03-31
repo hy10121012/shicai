@@ -1,0 +1,9 @@
+<div ng-controller="orderDetailsCtrl" ng-init="init(<%=@id%>)">
+  <div>
+      {{order.id}} {{order.user_id}} {{order.delivery_date_time}}
+  </div>
+
+  <ul ng-repeat="item in items">
+   <li> id {{item.id}} buyer_user_id  {{item.buyer_user_id}} amount {{item.amount}}     quantity  {{item.quantity}}</li>
+  </ul>
+</div>

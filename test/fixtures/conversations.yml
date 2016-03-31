@@ -1,0 +1,20 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_a_id: 1
+  user_b_id: 10
+  is_user_a_unread: false
+  is_user_b_unread: false
+
+two:
+  user_a_id: 2
+  user_b_id: 10
+  is_user_a_unread: false
+  is_user_b_unread: false
+
+
+three:
+  user_a_id: 1
+  user_b_id: 2
+  is_user_a_unread: false
+  is_user_b_unread: false

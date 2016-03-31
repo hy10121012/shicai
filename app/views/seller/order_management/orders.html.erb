@@ -1,0 +1,9 @@
+<div ng-controller="ordersCtrl" class="ordersCtrl">
+  <span ng-click="select_type('tmr')">明日订单</span>   <span ng-click="select_type('<%=OrderStatus::NEW%>')">新下货单</span> <span ng-click="select_type('<%=OrderStatus::ACCEPTED%>')">现有订单</span> <span ng-click="select_type('<%=OrderStatus::PAYABLE%>')">未结款订单</span>   <span ng-click="select_type('<%=OrderStatus::COMPLETED%>')">已款订单</span>
+
+  <div  ng-repeat="order in orders">
+    <div ng-click="view_details(order.id)">id: {{order.id}}  {{order.delivery_date_time}}</div>
+  </div>
+
+</div>
+

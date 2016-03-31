@@ -1,0 +1,2 @@
+module Seller::FinanceManagementHelper
+end

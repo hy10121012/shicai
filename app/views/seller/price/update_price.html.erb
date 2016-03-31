@@ -1,0 +1,7 @@
+<div ng-controller="pricingCtrl" ng-init="init(<%=@sub_cat_id%>)">
+
+  <div ng-repeat="item in items">
+    {{item.name}} : <input type="number" o-price="{{item.price}}" value="{{item.price}}" item-id="{{item.id}}"  ng-blur="update_price($event)" />
+  </div>
+
+</div>
