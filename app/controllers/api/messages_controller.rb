@@ -2,6 +2,16 @@ class Api::MessagesController < ApplicationController
 
   def set_read
     #设置消息为已读
+    conv_id = params[:conversation_id]
+    user_id = session[:user_id]
+    conv = Conversation.find(conv_id)
+    if(user_id==conv.user_a_id)
+      conv.is_user_a_unread=true
+    elsif user_id== conv.user_b_id
+      conv.is_user_b_unread=true
+    end
+    conv.save
+     render text: true
   end
 
   def send_message
@@ -23,7 +33,7 @@ class Api::MessagesController < ApplicationController
     render json: rs
   end
 
-  def find_conversation_text
+  def find_conversatiofffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffn_text
     rs = ConversationText.where('conversation_id=?', params[:conv_id]).order('created_at desc').limit(20)
     render json: rs
   end

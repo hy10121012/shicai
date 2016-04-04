@@ -2,22 +2,22 @@
 
 one:
   user_id: 1
-  address1: MyString
-  address2: MyString
-  district: MyString
-  city: MyString
-  provence: MyString
-  postcode: 1
+  address1: address1
+  address2: address2
+  district: 1
+  city: 1
+  provence: 1
+  postcode: 530022
   is_default: false
-  telephone: 1
+  telephone: 13707710589
 
 two:
   user_id: 1
-  address1: MyString
-  address2: MyString
-  district: MyString
-  city: MyString
-  provence: MyString
-  postcode: 1
+  address1: address1
+  address2: address2
+  district: 1
+  city: 1
+  provence: 1
+  postcode: 344522
   is_default: false
-  telephone: 1
+  telephone: 15077322112

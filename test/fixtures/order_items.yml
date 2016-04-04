@@ -2,12 +2,12 @@
 
 one:
   order_id: 1
-  item_id: 1
+  item_id: 10
   price: 25
   quantity: 10
 
 two:
   order_id: 1
-  item_id: 2
+  item_id: 20
   price: 1.5
   quantity: 10

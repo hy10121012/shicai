@@ -33,6 +33,7 @@ Rails.application.routes.draw do
 
   get  '/inventories' => 'seller/inventory#inventory', constraints: IsSeller
   get  '/home' => 'seller/inventory#inventory', constraints: IsSeller
+  get  '/home' => 'buyer/home#index', constraints: IsBuyer
   get  '/pricing/:sub_cat_id' => 'seller/price#update_price' , constraints: IsSeller
   get  '/orders' => 'seller/order_management#orders' , constraints: IsSeller
   get  '/order_details/:order_id' => 'seller/order_management#order_details' , constraints: IsSeller
@@ -49,7 +50,7 @@ Rails.application.routes.draw do
     get 'messages/find_messages'=>'api/messages#find_messages'
     get '/conversation/:conv_id' => 'api/messages#find_conversation_text'
     put '/send_message'=>'api/messages#send_message'
-
+    put '/create_order' =>'api/buyer/cart#create_order'
   end
 
 
