@@ -1,0 +1,28 @@
+@mixin filters() {
+  display: flex;
+  flex-wrap: nowrap;
+  background-color: $veryLightGrey;
+  border-bottom: 1px solid $midGrey;
+
+  white-space: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  width: 100%;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@mixin filter(){
+  flex-shrink: 0;
+  padding: 10px 15px;
+  border-right: 1px solid $midGrey;
+  color: $darkGrey;
+
+  &--selected {
+    background-color: $lightGrey;
+    border-bottom: 3px solid $grey;
+  }
+}

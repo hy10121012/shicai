@@ -5,8 +5,30 @@ class Api::Buyer::ItemListController < ApplicationController
     sub_cat_id = params[:sub_cat_id]
     items = Item.where sub_cat_id: sub_cat_id
 
-    render json: items
+    return_map = []
+    items.each do |item|
+      attr = item.attributes
+      attr[:pic] = item.profile_pic.picture_s_url
+      return_map.push(attr)
+    end
+
+
+    render json: return_map
   end
+
+  def find_frequent_item
+    if !session[:user_id].nil?
+      items = Item.find_frequent_item(session[:user_id], params[:cat_id])
+      return_map = []
+      items.each do |item|
+        attr = item.attributes
+        attr[:pic] = item.profile_pic.picture_s_url
+        return_map.push(attr)
+      end
+      render json: return_map
+    end
+  end
+
 
   def find_item_by_search
     #货品搜索结果

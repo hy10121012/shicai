@@ -5,23 +5,39 @@
   <!--[if lt IE 9]>
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta charset="UTF-8">
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,target-densitydpi=device-dpi, user-scalable=no">
+  <title>食材帮</title>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag params[:controller], "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
   <%= javascript_tag "var AUTH_TOKEN = '#{form_authenticity_token}';" if protect_against_forgery? %>
 </head>
 <body>
-<%= yield %>
- <ul>
-   <li><a href="/inventories">inventories</a> </li>
-   <li><a href="/orders">orders</a> </li>
-   <li><a href="/customers">customers</a> </li>
-   <li><a href="/fin_states">financial status</a> </li>
-   <li><a href="/messages">messages</a> </li>
 
- </ul>
+
+<div class="view">
+  <div class="seller-header" title="商品管理">
+    <div class="seller-header__back" ng-click="back()">
+      <!-- ngIf: showBackButton -->
+    </div>
+    <div class="seller-header__title">商品管理</div>
+    <div class="seller-header__icons">
+      <a href="#/seller/profile/basic" class="seller-header__icon" background-image="/img/seller/icon-profile.png" style="background-image: url('img/seller/icon-profile.png');"></a>
+      <a href="#/seller/messages-inbox" class="seller-header__icon" background-image="/img/seller/icon-message.png" style="background-image: url('img/seller/icon-message.png');"></a>
+    </div>
+  </div>
+  <div style="padding-top: 44px;">
+    <%= yield %>
+  </div>
+  <div ng-controller="sellerNavCtrl" class="seller-nav">
+      <a href="{{item.href}}" class="seller-nav__tile" ng-repeat="item in items ">
+        <div class="seller-nav__tile-image" background-image="/img/seller/icon-inventory.png" style="background-image: url('{{item.image}}');"></div>
+        <div class="seller-nav__tile-title">{{item.title}}</div>
+      </a>
+  </div>
+</div>
 </body>
 </html>
+

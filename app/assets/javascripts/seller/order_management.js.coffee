@@ -23,6 +23,11 @@ mainApp.controller 'ordersCtrl', ($scope, $http,$window) ->
     $window.location.href= '/order_details/'+id
 
   $scope.select_type 'tmr'
+  $http.get('../data/order_mgt_nav').success((data) ->
+    $scope.nav = data;
+  );
+
+
 
 
 

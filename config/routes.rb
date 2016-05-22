@@ -1,5 +1,29 @@
 Rails.application.routes.draw do
 
+  namespace :buyer do
+  get 'item/item_detail'
+  end
+
+  namespace :buyer do
+  get 'categories/index'
+  end
+
+  namespace :buyer do
+  get 'categories/show_by_cat'
+  end
+
+  namespace :buyer do
+  get 'categories/show_by_sub_cat'
+  end
+
+  namespace :buyer do
+  get 'categories/show_favor'
+  end
+
+  namespace :buyer do
+  get 'cart/index'
+  end
+
   namespace :seller do
   end
 
@@ -29,7 +53,7 @@ Rails.application.routes.draw do
 
 
   get 'login/login'
-  root 'login#login'
+  root 'seller/login#login'
 
   get  '/inventories' => 'seller/inventory#inventory', constraints: IsSeller
   get  '/home' => 'seller/inventory#inventory', constraints: IsSeller
@@ -41,6 +65,13 @@ Rails.application.routes.draw do
   get  '/customer_details/:user_id' => 'seller/customer_management#customer_details' , constraints: IsSeller
   get '/fin_states' => 'seller/finance_management#finance_summary'
   get '/conversation/:conv_id' => 'messages#find_conversation'
+  get  '/home' => 'buyer/home#index', constraints: IsBuyer
+  get  '/cart' => 'buyer/cart#index', constraints: IsBuyer
+  get 'categories' => 'buyer/categories#index', constraints: IsBuyer
+  get 'category/:cat_id' => 'buyer/categories#show_by_cat', constraints: IsBuyer
+  get 'item/:id' => 'buyer/item#item_detail', constraints: IsBuyer
+
+
 
 
   scope 'api' do
@@ -59,13 +90,20 @@ Rails.application.routes.draw do
       get 'account_management/find_orders_by_status'
       get 'account_management/find_order_count_summary'
       get 'account_management/find_user_addresses'
+      get 'account_management/find_user_default_address'
       get 'management/find_favor_sellers'
       get 'management/find_favor_items'
       get 'management/find_frequent_item'
       get 'management/remove_favor_seller'
       get 'management/remove_favor_item'
-      get 'cart/find_current_cart_list'
+      get 'cart/find_current_cart_list' => 'cart#find_current_cart_list'
       get 'find_home_cats' => 'home#find_home_category_items'
+      get 'find_ads_items' => 'home#find_ads_items'
+      get 'find_sub_cats_by_cat/:sub_cat_id' => 'item_list#find_sub_cats_by_sub_cat';
+      get 'find_frequent_item/:cat_id' => 'item_list#find_frequent_item';
+      get 'find_item_by_sub_cat/:sub_cat_id' => 'item_list#find_item_by_sub_cat';
+
+
     end
   end
 

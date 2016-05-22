@@ -2,8 +2,6 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-mainApp = angular.module 'mainApp', [];
-
 mainApp.controller 'loginCtrl', ($scope,$http,$window) ->
 
   loginSuccess = (response) ->

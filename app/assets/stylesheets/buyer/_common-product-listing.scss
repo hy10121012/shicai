@@ -1,0 +1,55 @@
+@mixin buyer-product-listing() {
+  &__items {
+
+  }
+
+  &__item {
+    @include page-padding;
+    height: 100px;
+    display: flex;
+    border-bottom: 1px solid $lightGrey;
+  }
+
+  &__thumbnail {
+    height: 100%;
+    min-width: 120px;
+    width: 40%;
+    background-size: cover;
+    background-position: 50%;
+  }
+
+  &__item_body {
+    width: 70%;
+    padding-left: 15px;
+    color: $darkGrey;
+  }
+
+  &__item-title {
+    font-weight: bold;
+    font-size: 13px;
+  }
+
+  &__item-description {
+    font-size: 12px;
+    color: $grey;
+  }
+
+  &__seller {
+    font-weight: bold;
+    font-size: 13px;
+  }
+
+  &__price {
+    color: $orange;
+  }
+
+  &__info {
+    padding-bottom: 10px;
+    height: 75px;
+  }
+
+  &__item-meta {
+    display: flex;
+    justify-content: space-between;
+  }
+}

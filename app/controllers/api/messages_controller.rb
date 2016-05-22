@@ -33,7 +33,7 @@ class Api::MessagesController < ApplicationController
     render json: rs
   end
 
-  def find_conversatiofffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffn_text
+  def find_conversation_text
     rs = ConversationText.where('conversation_id=?', params[:conv_id]).order('created_at desc').limit(20)
     render json: rs
   end

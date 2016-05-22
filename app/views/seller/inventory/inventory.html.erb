@@ -1,22 +1,19 @@
 <div ng-controller="inventoryCtrl">
-  <div ng-repeat ="cat in cats">
-    {{cat.name}}
+  <div class="seller-inventory__filters">
+    <div class="seller-inventory__filter" ng-click="deselectSubcategory()" ng-class="{'seller-inventory__filter--selected': !selectedSubcategory}">所有</div>
+    <div class="seller-inventory__filter" ng-click="setSelectedSubcategory(cat.name)" ng-repeat="cat in cats" ng-class="{'seller-inventory__filter--selected': cat.name === selectedSubcategory}">{{cat.name}}</div>
   </div>
-  <div ng-repeat ="(cat_name, sub_cats) in item_cats">
-    <div>
-     {{cat_name}}
-      <ul ng-repeat="item in sub_cats">
-        <li>{{item.name}}</li>  <a href="/pricing/{{item.sub_cat_id}}">change price</a>
-      </ul>
+  <a href="#/seller/product-new" class="seller-inventory__new-product">添加新商品</a>
+  <div ng-if="cat_name === selectedSubcategory || !selectedSubcategory" class="seller-inventory__group" ng-repeat="(cat_name, sub_cats) in item_cats">
+    <div class="seller-inventory__group-header">
+      <div class="seller-inventory__group-title">{{cat_name }}</div>
+      <div class="seller-inventory__price-change"><a href="/pricing/{{sub_cats[0].sub_cat_id}}" class="">快速改价</a></div>
+      <div class="clear"></div>
     </div>
-
+    <div class="seller-inventory__group-container">
+      <a href="#/seller/product-detail" class="seller-inventory__item" ng-repeat="item in sub_cats" background-image="{{ item.pic }}">
+        <div class="seller-inventory__item-name">{{item.name}}</div>
+      </a>
+    </div>
   </div>
-
-
-
-
 </div>
-
-
-<%= session['user_id'] %> <br>
-<%= session['user_type'] %>

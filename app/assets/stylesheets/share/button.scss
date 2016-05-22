@@ -1,0 +1,32 @@
+@mixin button(){
+  display: inline-block;
+  padding: 5px;
+  text-align: center;
+  border-radius: 2px;
+  font-size: 14px;
+  line-height: 14px;
+}
+
+@mixin button-primary() {
+  @include button;
+  border: 1px solid $midBlue;
+  background-color: $midBlue;
+  color: white;
+}
+
+@mixin button-secondary() {
+  @include button;
+  border: 1px solid $midBlue;
+  color: $midBlue;
+}
+
+@mixin button-action() {
+  @include button;
+  background-color: $orange;
+  border: 1px solid $orange;
+  color: $white;
+
+  &:visited, &:active, &:hover {
+    color: $white;
+  }
+}

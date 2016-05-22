@@ -2,19 +2,25 @@ class Api::Seller::InventoryController < ApplicationController
 
   def find_selling_items
     user_id = session[:user_id]
-    items =Item.where("user_id = ?", user_id)
+    items =Item.eager_load(:profile_pic).where("user_id = ?", user_id).includes(:profile_pic)
+
     return_map = {}
 
     items.each do |item|
       cat_name = item.sub_cat.category.name
+
       if return_map[cat_name].nil?
         return_map[cat_name]=[]
       end
-      return_map[cat_name].push(item)
+      attr  = item.attributes
+      if !item.profile_pic.nil?
+        attr[:pic] = item.profile_pic.picture_s_url
+      else
+        attr[:pic] = "images/default.jpg"
+      end
+      return_map[cat_name].push(attr)
 
     end
-
-    return_map
     render json: return_map
 
   end

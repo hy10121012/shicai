@@ -13,3 +13,16 @@
  *= require_tree .
  *= require_self
  */
+
+* {
+    box-sizing: border-box;
+}
+
+html, body, .view {
+    height: 100%;
+    margin:0px;
+}
+
+a :visited, a :hover, a :active {
+    color: inherit;
+}

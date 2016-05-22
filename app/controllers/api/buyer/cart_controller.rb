@@ -1,7 +1,7 @@
 class Api::Buyer::CartController < ApplicationController
   def find_current_cart_list
     #获取当前购物车
-    cart_items = Cart.find_by :user_id => session[:user_id]
+    cart_items = Cart.where :user_id => session[:user_id]
     render json: cart_items
   end
 
@@ -30,14 +30,14 @@ class Api::Buyer::CartController < ApplicationController
 
   def create_order
     #下单
-    items = params[:items]
+    items = params[:item_pics]
     address_id = params[:address_id]
     comment = params[:comment]
     buyer_id = session[:user_id]
     address_detail = Address.find address_id
     delivery_time = params[:delivery_time]
     orders = {}
-    state = {"qty"=>{},"amount"=>{}}
+    state = {"qty" => {}, "amount" => {}}
     items.each do |item|
       if orders[item['user_id']].nil?
         orders[item['user_id']] = []
@@ -45,7 +45,7 @@ class Api::Buyer::CartController < ApplicationController
         state["amount"][item['user_id']] = 0
       end
       orders[item['user_id']].push(item)
-      qty =   item["quantity"].to_i
+      qty = item["quantity"].to_i
       state["qty"][item['user_id']] += qty
       price = item["price"].to_f
       state["amount"][item['user_id']] += qty * price
@@ -53,7 +53,7 @@ class Api::Buyer::CartController < ApplicationController
     Item.transaction do
       orders.each do |seller_id, items|
         addr_text = address_detail.address1+"\n"+address_detail.address2+"\n"+address_detail.district+"\n"+address_detail.city
-        order = Order.new :buyer_user_id => buyer_id, :delivery_address => addr_text, :delivery_date_time => delivery_time, :user_id => seller_id, :comment => comment, :status => OrderStatus::NEW ,:quantity=> state["qty"][seller_id] , :amount=> state["amount"][seller_id]
+        order = Order.new :buyer_user_id => buyer_id, :delivery_address => addr_text, :delivery_date_time => delivery_time, :user_id => seller_id, :comment => comment, :status => OrderStatus::NEW, :quantity => state["qty"][seller_id], :amount => state["amount"][seller_id]
         order.save
         create_order_items order.id, items
       end
@@ -64,13 +64,10 @@ class Api::Buyer::CartController < ApplicationController
   private
   def create_order_items order_id, items
     items.each do |item|
-      order_item = OrderItem.new :order_id=>order_id, :item_id=>item["item_id"] , :price=> item["price"], :quantity=> item["quantity"]
+      order_item = OrderItem.new :order_id => order_id, :item_id => item["item_id"], :price => item["price"], :quantity => item["quantity"]
       order_item.save
     end
   end
-
-
-
 
 
 end

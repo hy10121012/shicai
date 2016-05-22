@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  item_id: 
-  picture_l_url: MyString
-  picture_s_url: MyString
-  is_profile: false
+  item_id: 1
+  picture_l_url: "/images/seller/item_pics/1/1.jpg"
+  picture_s_url:  "/images/seller/item_pics/1/1.jpg"
+  is_profile: true
 
 two:
-  item_id: 
-  picture_l_url: MyString
-  picture_s_url: MyString
-  is_profile: false
+  item_id: 2
+  picture_l_url:  "/images/seller/item_pics/1/1.jpg"
+  picture_s_url:  "/images/seller/item_pics/1/1.jpg"
+  is_profile: true

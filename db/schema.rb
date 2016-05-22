@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160328201503) do
+ActiveRecord::Schema.define(version: 20160405193229) do
 
   create_table "addresses", force: true do |t|
     t.integer  "user_id"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20160328201503) do
     t.string   "provence"
     t.integer  "postcode"
     t.boolean  "is_default"
-    t.integer  "telephone"
+    t.integer  "telephone",  limit: 8
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -117,6 +117,16 @@ ActiveRecord::Schema.define(version: 20160328201503) do
 
   add_index "districts", ["city_id"], name: "index_districts_on_city_id", using: :btree
 
+  create_table "favor_items", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "item_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "favor_items", ["item_id"], name: "index_favor_items_on_item_id", using: :btree
+  add_index "favor_items", ["user_id"], name: "index_favor_items_on_user_id", using: :btree
+
   create_table "favor_users", force: true do |t|
     t.integer  "user_id"
     t.integer  "favor_id"
@@ -156,7 +166,7 @@ ActiveRecord::Schema.define(version: 20160328201503) do
     t.integer  "order_id"
     t.integer  "item_id"
     t.float    "price",      limit: 24
-    t.integer  "quantity"
+    t.integer  "quantity",   limit: 8
     t.datetime "created_at"
     t.datetime "updated_at"
   end

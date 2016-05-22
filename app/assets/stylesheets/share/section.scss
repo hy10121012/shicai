@@ -1,0 +1,17 @@
+@mixin section() {
+  @include page-padding;
+}
+
+@mixin section-header() {
+  display: flex;
+  background: $veryLightGrey;
+  border-bottom: 1px solid $midGrey;
+  align-items: center;
+}
+
+@mixin section-title() {
+  padding: 10px;
+  border-left: 5px solid $grey;
+  font-size: 16px;
+  color: $darkGrey;
+}

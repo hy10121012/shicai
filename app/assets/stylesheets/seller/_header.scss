@@ -1,0 +1,10 @@
+@import "../include_share";
+
+.seller-header {
+  @include header;
+
+  &__back {
+    width: 60px;
+  }
+}
+

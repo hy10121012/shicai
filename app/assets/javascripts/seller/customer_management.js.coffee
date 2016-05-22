@@ -5,7 +5,7 @@
 mainApp = angular.module 'mainApp', [];
 
 mainApp.controller 'customersCtrl', ($scope, $http, $window) ->
-  $http.get('/api/seller/fiance_management/find_finance_summary').then((response) ->
+  $http.get('/api/seller/finance_management/find_finance_summary').then((response) ->
     console.log(response.data)
     $scope.customers = response.data
   , (response) ->

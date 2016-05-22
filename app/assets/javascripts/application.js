@@ -12,9 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-
 //= require angular.min
-
+//= require app
 
 var add_csrf = function(data){
     data['authenticity_token'] =AUTH_TOKEN

@@ -2,7 +2,6 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-mainApp = angular.module 'mainApp', [];
 
 mainApp.controller 'inventoryCtrl', ($scope, $http, $window) ->
   $http.get('/api/seller/find_home_cats').then((response) ->
@@ -20,5 +19,9 @@ mainApp.controller 'inventoryCtrl', ($scope, $http, $window) ->
     console.log(response.data)
     alert "fail: " + response.data
   );
+  $scope.setSelectedSubcategory = (name) ->
+    $scope.selectedSubcategory = name
+  $scope.deselectSubcategory = ()->
+    $scope.selectedSubcategory = null;
 
 

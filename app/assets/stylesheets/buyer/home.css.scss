@@ -1,3 +1,130 @@
 // Place all the styles related to the buyer/Home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import "../include_share";
+
+.buyer-landing {
+  @include page-content;
+  background-color: $veryLightGrey;
+
+  @mixin flex-table() {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  @mixin background-image() {
+    background: no-repeat 50%;
+  }
+
+  @mixin title() {
+    width: 100%;
+    font-size: 18px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+
+    &, :visited, :active {
+      color: $darkGrey
+    }
+  }
+
+  &__banner {
+    @include flex-table;
+    @include background-image;
+    background-size: cover;
+    height: 150px;
+    margin-left: -7px;
+    margin-right: -7px;
+  }
+
+  &__logo {
+    @include background-image;
+    width: 100%;
+    height: 80%;
+    background-size: contain;
+  }
+
+  &__categories {
+    @include flex-table;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 7px;
+    margin-bottom: 7px;
+  }
+
+  &__category {
+    @include flex-table;
+    justify-content: center;
+    background-color: $white;
+    width: calc(25% - 5px);
+    padding: 7px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: $darkGrey;
+  }
+
+  &__category-icon {
+    @include background-image;
+    width: 80%;
+    background-size: contain;
+    padding-bottom: calc(100% - 25px);
+  }
+
+  &__category-label {
+    padding-top: 7px;
+  }
+
+  &__search {
+    @include flex-table;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 7px;
+    margin-bottom: 7px;
+    background: linear-gradient(white, $veryLightGrey);
+  }
+
+  &__search-title {
+    @include title;
+    text-align: center;
+    color: $orange;
+  }
+
+  &__search-item {
+    @include flex-table;
+    justify-content: flex-start;
+    background-color: $white;
+    width: calc(50% - 7px);
+    margin-top: 3px;
+    margin-bottom: 10px;
+  }
+
+  &__search-image {
+    @include background-image;
+    background-size: cover;
+    width: 100%;
+    padding-bottom: calc(100% - 30px);
+  }
+
+  &__search-content {
+    padding: 3px;
+  }
+
+  &__item-name {
+    font-weight: bold;
+    line-height: 20px;
+  }
+
+  &__item-price {
+    color: $orange;
+  }
+
+  &__item-description {
+    padding-top: 5px;
+    line-height: 20px;
+  }
+
+  &__item-seller {
+    color: $orange;
+    line-height: 20px;
+  }
+}

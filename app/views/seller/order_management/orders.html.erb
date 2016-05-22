@@ -1,8 +1,25 @@
 <div ng-controller="ordersCtrl" class="ordersCtrl">
-  <span ng-click="select_type('tmr')">明日订单</span>   <span ng-click="select_type('<%=OrderStatus::NEW%>')">新下货单</span> <span ng-click="select_type('<%=OrderStatus::ACCEPTED%>')">现有订单</span> <span ng-click="select_type('<%=OrderStatus::PAYABLE%>')">未结款订单</span>   <span ng-click="select_type('<%=OrderStatus::COMPLETED%>')">已款订单</span>
+  <div class="seller-orders__filters">
+    <div class="seller-orders__filter seller-orders__filter--selected" ng-click="deselectType()" ng-class="{'seller-orders__filter--selected': !selectedType}">所有</div>
+    <div class="seller-orders__filter" ng-click="setSelectedType(type)" ng-repeat="type in types" ng-class="{'seller-orders__filter--selected': item.type === selectedType}">{{ type }}</div>
 
-  <div  ng-repeat="order in orders">
-    <div ng-click="view_details(order.id)">id: {{order.id}}  {{order.delivery_date_time}}</div>
+
+    <!-- ngRepeat: item in orders -->
+    <div class="seller-orders__filter" ng-click="setSelectedType(item.type)" ng-repeat="item in orders" ng-class="{'seller-orders__filter--selected': item.type === selectedType}">明日订单</div><!-- end ngRepeat: item in orders -->
+    <div class="seller-orders__filter" ng-click="setSelectedType(item.type)" ng-repeat="item in orders" ng-class="{'seller-orders__filter--selected': item.type === selectedType}">新下货单</div><!-- end ngRepeat: item in orders -->
+    <div class="seller-orders__filter" ng-click="setSelectedType(item.type)" ng-repeat="item in orders" ng-class="{'seller-orders__filter--selected': item.type === selectedType}">现有货单</div><!-- end ngRepeat: item in orders -->
+    <div class="seller-orders__filter" ng-click="setSelectedType(item.type)" ng-repeat="item in orders" ng-class="{'seller-orders__filter--selected': item.type === selectedType}">未结款订单</div><!-- end ngRepeat: item in orders -->
+    <div class="seller-orders__filter" ng-click="setSelectedType(item.type)" ng-repeat="item in orders" ng-class="{'seller-orders__filter--selected': item.type === selectedType}">已结款订单</div><!-- end ngRepeat: item in orders -->
+  </div>
+
+
+  <span ng-click="select_type('tmr')">明日订单</span> <span ng-click="select_type('<%= OrderStatus::NEW %>')">新下货单</span>
+  <span ng-click="select_type('<%= OrderStatus::ACCEPTED %>')">现有订单</span>
+  <span ng-click="select_type('<%= OrderStatus::PAYABLE %>')">未结款订单</span>
+  <span ng-click="select_type('<%= OrderStatus::COMPLETED %>')">已款订单</span>
+
+  <div ng-repeat="order in orders">
+    <div ng-click="view_details(order.id)">id: {{order.id}} {{order.delivery_date_time}}</div>
   </div>
 
 </div>

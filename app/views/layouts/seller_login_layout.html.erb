@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="mainApp">
+<head>
+  <title>Shicai</title>
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,target-densitydpi=device-dpi, user-scalable=no">
+  <title>食材帮</title>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag params[:controller], "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+  <%= javascript_tag "var AUTH_TOKEN = '#{form_authenticity_token}';" if protect_against_forgery? %>
+</head>
+<body>
+
+
+<div class="view">
+  <%= yield %>
+</div>
+
+</body>
+</html>
+

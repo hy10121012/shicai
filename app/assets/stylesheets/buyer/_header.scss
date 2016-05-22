@@ -1,0 +1,27 @@
+@import "../include_share";
+
+.buyer-header {
+  @include header;
+
+  &__search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $lightRed;
+    padding: 5px 25px;
+    font-size: 14px;
+    width: 67%;
+  }
+
+  &__placeholder-icon {
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-right: 10px;
+  }
+
+  &__back {
+    width: 20px;
+  }
+}
