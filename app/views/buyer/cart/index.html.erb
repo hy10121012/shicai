@@ -1,0 +1,24 @@
+<div ng-controller="cartCtrl">
+  <div>
+    {{default_address.address1}}
+  </div>
+  <div>
+    {{default_address.address2}}
+  </div>
+  <div>
+    {{default_address.district}}
+  </div>
+  <div>
+    {{default_address.city}}
+  </div>
+  <div>
+    {{default_address.pp}}
+  </div>
+
+
+  <div ng-repeat="item in cart_items">
+    {{item.item_id}}
+  </div>
+
+
+</div>

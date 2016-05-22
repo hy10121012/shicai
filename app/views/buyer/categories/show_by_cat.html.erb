@@ -1,0 +1,23 @@
+<div ng-controller="catItemsCtrl" ng-init="init(<%=@id%>)">
+  <div class="buyer-landing" style="background-color: #FFFFFF;">
+    <div class="buyer-product-result__filters">
+      <div class="buyer-product-result__filter" ng-click="deselectSubcategory()">常用商品</div>
+      <div class="buyer-product-result__filter" ng-click="setSelectedSubcategory(cat.id)" ng-repeat="cat in sub_cats">{{cat.name}}</div>
+    </div>
+    <div class="buyer-product-result__items">
+      <a href="/item/{{item.id}}" class="buyer-product-result__item" ng-repeat="item in items">
+        <div class="buyer-product-result__thumbnail" background-image="{{ item.pic }}"></div>
+        <div class="buyer-product-result__item_body">
+          <div class="buyer-product-result__info">
+            <span class="buyer-product-result__item-title">{{ item.title }}</span>
+            <span class="buyer-product-result__item-description">{{ item.description }}</span>
+          </div>
+          <div class="buyer-product-result__item-meta">
+
+            <div class="buyer-product-result__price">{{ item.price }}</div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

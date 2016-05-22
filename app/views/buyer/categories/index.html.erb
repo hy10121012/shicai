@@ -1,0 +1,13 @@
+<div class="buyer-landing" style="background-color: #FFFFFF;">
+  <div class="buyer-category__items" style="justify-content: flex-start" ng-controller="catCtrl">
+    <a href="#/buyer/products" class="buyer-category__item">
+      <div class="buyer-landing__category-icon" background-image="/img/buyer/cat/4.png"></div>
+      <div class="buyer-landing__category-label">常用食材</div>
+    </a>
+
+    <a ng-repeat="cat in cats"  href="/category/{{cat.id}}" class="buyer-category__item">
+      <div class="buyer-category__item-icon" background-image="/img/buyer/cat/{{cat.id}}.png"></div>
+      <div class="buyer-category__item-label"> {{cat.name}}</div>
+    </a>
+  </div>
+</div>

@@ -1,0 +1,63 @@
+// Place all the styles related to the buyer/categories controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "../include_share";
+@import "common-product-listing";
+
+.buyer-category{
+  @mixin flex-table() {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  @mixin background-image() {
+    background: no-repeat 50%;
+  }
+
+  &__items {
+    @include flex-table;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 7px;
+    margin-bottom: 7px;
+  }
+
+
+  &__item {
+    @include flex-table;
+    justify-content: center;
+    background-color: $white;
+    width: calc(25% - 5px);
+    padding: 7px;
+    margin: 5px 2px;
+    border: 1px solid $midGrey;
+    color: $darkGrey;
+  }
+
+  &__item-icon {
+    @include background-image;
+    width: 80%;
+    background-size: contain;
+    padding-bottom: calc(100% - 25px);
+  }
+
+  &__item-label {
+    padding-top: 7px;
+  }
+
+
+}
+
+.buyer-product-result {
+  @include page-content;
+
+  &__filters {
+    @include filters;
+  }
+
+  &__filter {
+    @include filter;
+  }
+
+  @include buyer-product-listing;
+}
