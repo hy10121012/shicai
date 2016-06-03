@@ -1,0 +1,28 @@
+.counter {
+  display: flex;
+
+  $height: 25px;
+
+  &__quantity {
+    display: flex;
+    width: 50px;
+    font-size: 12px;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid #B2B2B2;
+    border-bottom: 1px solid #B2B2B2;
+    height: $height;
+    text-align: center;
+  }
+
+  &__button {
+    display: flex;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+    background-color: #EBEBEB;
+    border: 1px solid #B2B2B2;
+    width: 25px;
+    height: $height;
+  }
+}

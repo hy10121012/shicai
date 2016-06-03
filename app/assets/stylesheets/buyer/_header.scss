@@ -8,20 +8,58 @@
     align-items: center;
     justify-content: center;
     background-color: $lightRed;
-    padding: 5px 25px;
     font-size: 14px;
+    box-sizing: border-box;
     width: 67%;
+
+    ::-webkit-input-placeholder {
+      color: #FFFFFF;
+    }
+
+    :-moz-placeholder { /* Firefox 18- */
+      color: #FFFFFF;
+    }
+
+    ::-moz-placeholder {  /* Firefox 19+ */
+      color: #FFFFFF;
+    }
+
+    :-ms-input-placeholder {
+      color: #FFFFFF;
+    }
   }
 
   &__placeholder-icon {
-    width: 20px;
-    height: 20px;
+    box-sizing: border-box;
     background-size: contain;
-    background-repeat: no-repeat;
-    margin-right: 10px;
+    cursor: pointer;
+    background: no-repeat center;
+    background-color: rgba(255,255,255,0.31);
+    background-size: auto 80%;
+    margin: 0px;
+    height: 30px;
+    width: 20%;
   }
+
+  &__placeholder-text{
+    background-color: transparent;
+    border: 0px;
+    border-bottom: 1px solid #FFFFFF;
+    color: #FFFFFF;
+    width: 100%;
+
+    &-box{
+      width: 80%;
+      padding: 5px ;
+
+    }
+
+  }
+
+
 
   &__back {
     width: 20px;
   }
 }
+

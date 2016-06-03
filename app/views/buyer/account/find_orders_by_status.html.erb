@@ -1,0 +1,33 @@
+<div class="buyer-orders" ng-controller="orderListCtrl" ng-init="init('<%=params[:status]%>')">
+
+  <div class="buyer-orders__controls">
+    <div class="buyer-orders__control-label">排序</div>
+    <select class="buyer-orders__control-select">
+      <option value="1">下单日期</option>
+      <option value="2">数量</option>
+    </select>
+  </div>
+  <div class="buyer-orders__items">
+    <a href="/order_details/{{item.id}}" class="buyer-orders__item" ng-repeat="item in orders">
+      <div class="buyer-orders__item-left">
+        <div class="buyer-orders__line buyer-orders__line--order-id">
+          <span>货单号:</span>
+          <span>{{ item.id }}</span>
+        </div>
+
+        <div class="buyer-orders__line buyer-orders__line--delivery-date">
+          <span>地址:</span>
+          <span >{{ item.delivery_address }}</span>
+        </div>
+        <div class="buyer-orders__line buyer-orders__line--delivery-date">
+          <span>送货日期:</span>
+          <span date="{{ item.delivery_date_time }}"></span>
+        </div>
+        <div class="buyer-orders__line buyer-orders__line--status" status="{{ item.status }}"></div>
+      </div>
+      <div class="buyer-orders__item-right">
+        <div class="buyer-orders__line  buyer-orders__line--amount">&#165;{{ item.amount }}</div>
+      </div>
+    </a>
+  </div>
+</div>

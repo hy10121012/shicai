@@ -1,0 +1,26 @@
+@mixin textbox() {
+  border: 1px solid $lightGrey;
+  padding: 5px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border-radius: 0;
+}
+
+@mixin textbox-label() {
+  font-size: 16px;
+  margin: 0;
+  color: $darkGrey;
+  height: 34px;
+  padding: 7px 8px;
+}
+
+@mixin textbox-value() {
+  height: 34px;
+
+  margin: 0;
+  font-size: 16px;
+  flex: 1 0 auto;
+  text-align: left;
+  padding: 7px 8px;
+  border: 1px solid $lightGrey;
+}

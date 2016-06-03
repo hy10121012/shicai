@@ -12,7 +12,11 @@
  *
  *= require_tree .
  *= require_self
+ *= require bootstrap.min
+ *= require bootstrap-datetimepicker
  */
+
+
 
 * {
     box-sizing: border-box;
@@ -24,5 +28,6 @@ html, body, .view {
 }
 
 a :visited, a :hover, a :active {
-    color: inherit;
+    color: inherit; !important;
+    text-decoration: none; !important;
 }

@@ -11,20 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160405193229) do
+ActiveRecord::Schema.define(version: 20160527053627) do
 
   create_table "addresses", force: true do |t|
     t.integer  "user_id"
     t.string   "address1"
-    t.string   "address2"
-    t.string   "district"
-    t.string   "city"
-    t.string   "provence"
+    t.string   "street_id"
+    t.string   "district_id"
+    t.string   "city_id"
+    t.string   "province_id"
     t.integer  "postcode"
     t.boolean  "is_default"
-    t.integer  "telephone",  limit: 8
+    t.integer  "telephone",   limit: 8
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name"
   end
 
   add_index "addresses", ["user_id"], name: "index_addresses_on_user_id", using: :btree
@@ -155,11 +156,13 @@ ActiveRecord::Schema.define(version: 20160405193229) do
     t.integer  "brand_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "unit_id"
   end
 
   add_index "items", ["brand_id"], name: "index_items_on_brand_id", using: :btree
   add_index "items", ["payment_id"], name: "index_items_on_payment_id", using: :btree
   add_index "items", ["sub_cat_id"], name: "index_items_on_sub_cat_id", using: :btree
+  add_index "items", ["unit_id"], name: "index_items_on_unit_id", using: :btree
   add_index "items", ["user_id"], name: "index_items_on_user_id", using: :btree
 
   create_table "order_items", force: true do |t|
@@ -172,7 +175,6 @@ ActiveRecord::Schema.define(version: 20160405193229) do
   end
 
   create_table "orders", force: true do |t|
-    t.integer  "buyer_user_id"
     t.text     "delivery_address"
     t.integer  "delivery_date_time"
     t.integer  "order_taken_date_time"
@@ -194,11 +196,29 @@ ActiveRecord::Schema.define(version: 20160405193229) do
     t.datetime "updated_at"
   end
 
+  create_table "promotions", force: true do |t|
+    t.integer  "item_id"
+    t.integer  "weight"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "promotions", ["item_id"], name: "index_promotions_on_item_id", using: :btree
+
   create_table "provinces", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "streets", force: true do |t|
+    t.string   "name"
+    t.integer  "district_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "streets", ["district_id"], name: "index_streets_on_district_id", using: :btree
 
   create_table "sub_cats", force: true do |t|
     t.string   "name"
@@ -208,6 +228,13 @@ ActiveRecord::Schema.define(version: 20160405193229) do
   end
 
   add_index "sub_cats", ["category_id"], name: "index_sub_cats_on_category_id", using: :btree
+
+  create_table "units", force: true do |t|
+    t.string   "text"
+    t.integer  "quantity"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "user_finances", force: true do |t|
     t.integer  "overall_revenue"

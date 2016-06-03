@@ -1,0 +1,18 @@
+<div class="buyer-profile-addresses" ng-controller="changeAddrCtrl" >
+  <form id="address_form" action="/cart" method="post" style="display: none"><%= hidden_field_tag :authenticity_token, form_authenticity_token %><input name="address_id" type="hidden" id="address_id" value="" />  </form>
+  <div class="buyer-profile-addresses__items">
+    <div ng-click="change_address(address.id)" class="buyer-profile-addresses__address" ng-repeat="address in addresses">
+      <div class="buyer-profile-addresses__address-left">
+        <div class="buyer-profile-addresses__address-row">{{ address.name }} {{ address.phone }}</div>
+        <div class="buyer-profile-addresses__address-row">{{ address.address1 }}</div>
+        <div class="buyer-profile-addresses__address-row">{{ address.street }}</div>
+        <div class="buyer-profile-addresses__address-row">{{ address.district }}</div>
+        <div class="buyer-profile-addresses__address-row">{{ address.city }}</div>
+        <div class="buyer-profile-addresses__address-row">{{ address.province }}</div>
+      </div>
+      <div class="buyer-profile-addresses__address-right">
+        <div ng-if="address.is_default" class="buyer-profile-addresses__address-default">默认</div>
+      </div>
+    </div>
+  </div>
+</div>

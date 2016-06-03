@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html ng-app="mainApp">
 <head>
-  <title>Shicai</title>
   <!--[if lt IE 9]>
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
@@ -9,21 +8,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,target-densitydpi=device-dpi, user-scalable=no">
   <title>食材帮</title>
 
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag params[:controller], "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
   <%= javascript_tag "var AUTH_TOKEN = '#{form_authenticity_token}';" if protect_against_forgery? %>
 </head>
 <body>
-<div class="buyer-header" title="首页">
-  <div ng-if="!showGotoSeller" class="buyer-header__back" ng-click="back()">
-    <img ng-if="showBackButton" src="/img/button-back.png">
-  </div>
-  <div  class="buyer-header__search">
-    <div class="buyer-header__placeholder-icon" background-image="/img/buyer/header-search.png"></div>
-    <div class="buyer-header__placeholder-text">搜索商品或类别</div>
-  </div>
+<div class="buyer-header" title="首页" ng-controller="topNavCtrl">
+
+  <% if showBack %>
+      <div class="buyer-header__back" back ng-click="back()">
+        <img src="/img/button-back.png">
+      </div>
+  <% else %>
+      <div class="buyer-header__back">
+      </div>
+  <% end %>
+
+  <% if showSearch %>
+      <div class="buyer-header__search">
+        <div class="buyer-header__placeholder-text-box">
+          <input class="buyer-header__placeholder-text" type="text" ng-model="keyword" placeholder="搜索商品或类别"/></div>
+        <div class="buyer-header__placeholder-icon" background-image="/img/buyer/header-search.png" ng-click="search()"></div>
+      </div>
+  <% else %>
+      <div class="buyer-header__title">
+        <span><%=@title%></span>
+      </div>
+  <% end %>
   <div ng-if="title" class="buyer-header__title">
     <span>{{ title }}</span>
   </div>
@@ -34,9 +47,9 @@
 </div>
 <div class="buyer-nav" ng-controller="buyerNavCtrl">
   <a href="{{item.href}}" class="buyer-nav__tile" ng-repeat="item in buyer_navs">
-  <div class="buyer-nav__tile-image" background-image="{{item.image}}" ></div>
-  <div class="buyer-nav__tile-title">{{item.title}}</div>
-</a>
+    <div class="buyer-nav__tile-image" background-image="{{item.image}}"></div>
+    <div class="buyer-nav__tile-title">{{item.title}}</div>
+  </a>
 </div>
 </body>
 </html>

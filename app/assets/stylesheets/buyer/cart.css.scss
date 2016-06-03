@@ -1,3 +1,99 @@
 // Place all the styles related to the buyer/cart controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import "../include_share";
+
+
+.buyer-shopping-cart {
+  @include page-content;
+
+  &__address {
+    @include page-padding;
+    display: flex;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid $lightGrey;
+  }
+
+  &__address-left {
+    width: 75%;
+  }
+
+  &__address-right {
+    display: flex;
+    width: 25%;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__address-heading {
+    padding-bottom: 10px;
+    color: $grey;
+  }
+
+  &__address-row {
+    font-size: 12px;
+    line-height: 25px;
+  }
+
+  &__address-button {
+    @include button-secondary;
+  }
+
+  &__item {
+    @include page-padding;
+    display: flex;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid $lightGrey;
+  }
+
+  &__thumbnail {
+    width: 100px;
+    height: 80px;
+    margin-right: 10px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  &__item-body {
+    flex-grow: 1;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-between;
+  }
+
+  &__item-line {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  &__item-seller {
+    width: 120px;
+  }
+
+  &__item-price {
+    color: $orange;
+  }
+
+  &__item-remove {
+    @include button-secondary;
+  }
+
+  &__summary {
+    @include page-padding;
+    display: flex;
+    padding-top: 30px;
+  }
+
+  &__total {
+    width: 50%
+  }
+
+  &__submit {
+    @include button-primary;
+    width: 50%;
+  }
+}

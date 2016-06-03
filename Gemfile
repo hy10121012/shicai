@@ -10,6 +10,10 @@ gem 'mysql2', '~> 0.3.18'
 # Use SCSS for stylesheets
 gem 'sass', '~> 3.4', '>= 3.4.22'
 gem 'sass-rails', '~> 5.0', '>= 5.0.4'
+
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.14.30'
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
@@ -24,6 +28,13 @@ gem 'paypal-sdk-merchant'
 gem 'tzinfo-data'
 
 gem 'has_secure_token'
+
+gem 'sunspot_rails'
+group :development do
+  gem 'sunspot_solr'
+end
+gem 'progress_bar'
+
 
 gem 'cocaine'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes

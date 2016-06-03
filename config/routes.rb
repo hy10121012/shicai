@@ -1,42 +1,157 @@
 Rails.application.routes.draw do
 
+  namespace :api do
   namespace :buyer do
-  get 'item/item_detail'
+    get 'payment/payment'
+    end
+  end
+
+  namespace :api do
+  namespace :buyer do
+    get 'payment/payment_callback'
+    end
   end
 
   namespace :buyer do
-  get 'categories/index'
+  get 'payment/payment'
   end
 
   namespace :buyer do
-  get 'categories/show_by_cat'
+  get 'payment/payment_callback'
+  end
+
+  namespace :api do
+  namespace :buyer do
+    get 'order/order_details'
+    end
+  end
+
+  namespace :api do
+  namespace :buyer do
+    get 'order/find_orders_by_status'
+    end
+  end
+
+  namespace :api do
+  namespace :buyer do
+    get 'order/find_tmr_order'
+    end
   end
 
   namespace :buyer do
-  get 'categories/show_by_sub_cat'
+    get 'account/index'
   end
 
   namespace :buyer do
-  get 'categories/show_favor'
+    get 'account/basic_info'
   end
 
   namespace :buyer do
-  get 'cart/index'
+    get 'account/pw'
+  end
+
+  namespace :buyer do
+    get 'account/payment'
+  end
+
+  namespace :api do
+    namespace :buyer do
+      get 'account/index'
+    end
+  end
+
+  namespace :api do
+    namespace :buyer do
+      get 'account/basic_info'
+    end
+  end
+
+  namespace :api do
+    namespace :buyer do
+      get 'account/pw'
+    end
+  end
+
+  namespace :api do
+    namespace :buyer do
+      get 'account/payment'
+    end
+  end
+
+  namespace :api do
+    namespace :buyer do
+      get 'address/find_user_addresses'
+    end
+  end
+
+  namespace :api do
+    namespace :buyer do
+      get 'address/find_address_detail'
+    end
+  end
+
+  namespace :api do
+    namespace :buyer do
+      get 'address/update_address'
+    end
+  end
+
+  namespace :api do
+    namespace :buyer do
+      get 'address/insert_address'
+    end
+  end
+
+  namespace :api do
+    namespace :buyer do
+      get 'address/deete_address'
+    end
+  end
+
+  namespace :buyer do
+    get 'address/address_list'
+  end
+
+  namespace :buyer do
+    get 'address/address_detail'
+  end
+
+  namespace :buyer do
+    get 'item/item_detail'
+  end
+
+  namespace :buyer do
+    get 'categories/index'
+  end
+
+  namespace :buyer do
+    get 'categories/show_by_cat'
+  end
+
+  namespace :buyer do
+    get 'categories/show_by_sub_cat'
+  end
+
+  namespace :buyer do
+    get 'categories/show_favor'
+  end
+
+  namespace :buyer do
+    get 'cart/index'
   end
 
   namespace :seller do
   end
 
   namespace :seller do
-  get 'customer_management/customers'
-  get 'finance_management/finance_summary'
-  get 'customer_management/customer_details'
-  get 'order/orderDetail'
-  get 'price/update_price'
-  get 'order/orders'
+    get 'customer_management/customers'
+    get 'finance_management/finance_summary'
+    get 'customer_management/customer_details'
+    get 'order/orderDetail'
+    get 'price/update_price'
+    get 'order/orders'
 
   end
-
 
 
   class IsSeller
@@ -53,44 +168,59 @@ Rails.application.routes.draw do
 
 
   get 'login/login'
-  root 'seller/login#login'
+  root 'login#login'
 
-  get  '/inventories' => 'seller/inventory#inventory', constraints: IsSeller
-  get  '/home' => 'seller/inventory#inventory', constraints: IsSeller
-  get  '/home' => 'buyer/home#index', constraints: IsBuyer
-  get  '/pricing/:sub_cat_id' => 'seller/price#update_price' , constraints: IsSeller
-  get  '/orders' => 'seller/order_management#orders' , constraints: IsSeller
-  get  '/order_details/:order_id' => 'seller/order_management#order_details' , constraints: IsSeller
-  get  '/customers' => 'seller/customer_management#customers' , constraints: IsSeller
-  get  '/customer_details/:user_id' => 'seller/customer_management#customer_details' , constraints: IsSeller
+  get '/inventories' => 'seller/inventory#inventory', constraints: IsSeller
+  get '/home' => 'seller/inventory#inventory', constraints: IsSeller
+  get '/home' => 'buyer/home#index', constraints: IsBuyer
+  get '/pricing/:sub_cat_id' => 'seller/price#update_price', constraints: IsSeller
+  get '/orders' => 'seller/order_management#orders', constraints: IsSeller
+  get '/order_details/:order_id' => 'seller/order_management#order_details', constraints: IsSeller
+  get '/customers' => 'seller/customer_management#customers', constraints: IsSeller
+  get '/customer_details/:user_id' => 'seller/customer_management#customer_details', constraints: IsSeller
   get '/fin_states' => 'seller/finance_management#finance_summary'
   get '/conversation/:conv_id' => 'messages#find_conversation'
-  get  '/home' => 'buyer/home#index', constraints: IsBuyer
-  get  '/cart' => 'buyer/cart#index', constraints: IsBuyer
-  get 'categories' => 'buyer/categories#index', constraints: IsBuyer
-  get 'category/:cat_id' => 'buyer/categories#show_by_cat', constraints: IsBuyer
-  get 'item/:id' => 'buyer/item#item_detail', constraints: IsBuyer
-
+  get '/home' => 'buyer/home#index', constraints: IsBuyer
+  get '/cart' => 'buyer/cart#index', constraints: IsBuyer
+  post '/cart' => 'buyer/cart#index', constraints: IsBuyer
+  get '/categories' => 'buyer/categories#index', constraints: IsBuyer
+  get '/category/:cat_id' => 'buyer/categories#show_by_cat', constraints: IsBuyer
+  get '/item/:item_id' => 'buyer/item#item_detail', constraints: IsBuyer
+  get '/addresses' => 'buyer/address#address_list', constraints: IsBuyer
+  get 'address_new' => 'buyer/address#address_new', constraints: IsBuyer
+  get '/change_addr' => 'buyer/address#change_addr', constraints: IsBuyer
+  get '/address/:id' => 'buyer/address#address_detail', constraints: IsBuyer
+  get '/account' => 'buyer/account#index', constraints: IsBuyer
+  get '/account/basic_info' => 'buyer/account#basic_info', constraints: IsBuyer
+  get '/account/pw' => 'buyer/account#pw', constraints: IsBuyer
+  get '/account/payment' => 'buyer/account#payment', constraints: IsBuyer
+  get '/search/:search' => 'buyer/home#search', constraints: IsBuyer
+  get '/account/orders/:status' => 'buyer/account#find_orders_by_status', constraints:IsBuyer
+  get '/tmr_order' => 'buyer/account#find_tmr_order', constraints:IsBuyer
+  get '/history_order' => 'buyer/account#find_orders_by_status', constraints:IsBuyer
+  get '/order_details/:order_id' => 'buyer/account#find_order_details'
+  get '/payment/:order_id' => 'buyer/payment#payment'
 
 
 
   scope 'api' do
     post 'login' => 'api/login#do_login_action'
     get 'login' => 'api/login#login_action'
-    put 'create_user'=>'api/login#do_create_user'
-    get 'messages/find_messages'=>'api/messages#find_messages'
+    put 'create_user' => 'api/login#do_create_user'
+    get 'messages/find_messages' => 'api/messages#find_messages'
     get '/conversation/:conv_id' => 'api/messages#find_conversation_text'
-    put '/send_message'=>'api/messages#send_message'
-    put '/create_order' =>'api/buyer/cart#create_order'
+    put '/send_message' => 'api/messages#send_message'
+    put '/create_order' => 'api/buyer/cart#create_order'
   end
 
 
   namespace :api do
     namespace :buyer do
-      get 'account_management/find_orders_by_status'
+      get 'orders/:status' => 'order#find_orders_by_status';
       get 'account_management/find_order_count_summary'
-      get 'account_management/find_user_addresses'
-      get 'account_management/find_user_default_address'
+      get 'address_list' => 'address#find_user_addresses';
+      get 'address_details/:id' => 'address#find_address_detail';
+      get 'find_user_default_address' => 'address#find_user_default_address';
       get 'management/find_favor_sellers'
       get 'management/find_favor_items'
       get 'management/find_frequent_item'
@@ -99,9 +229,24 @@ Rails.application.routes.draw do
       get 'cart/find_current_cart_list' => 'cart#find_current_cart_list'
       get 'find_home_cats' => 'home#find_home_category_items'
       get 'find_ads_items' => 'home#find_ads_items'
-      get 'find_sub_cats_by_cat/:sub_cat_id' => 'item_list#find_sub_cats_by_sub_cat';
+      get 'find_sub_cats_by_cat/:cat_id' => 'item_list#find_sub_cats_by_cat';
       get 'find_frequent_item/:cat_id' => 'item_list#find_frequent_item';
       get 'find_item_by_sub_cat/:sub_cat_id' => 'item_list#find_item_by_sub_cat';
+      get 'item/:item_id' => 'item_list#find_item_detail';
+      get 'find_city/:province_id' => 'address#find_city_by_province_id';
+      get 'find_district/:city_id' => 'address#find_district_by_city_id';
+      get 'find_street/:district_id' => 'address#find_street_by_district_id';
+      get 'find_order_status' => 'order#find_order_counts';
+      get '/tmr_order' => 'order#find_tmr_order'
+      get '/history_order' => 'order#history_order'
+      get '/find_order_details/:order_id' => 'order#find_order_details'
+      get '/find_order_items/:order_id' => 'order#find_order_items'
+      post 'set_default_address' =>   'address#set_default';
+      post 'add_to_cart' => 'item_list#add_to_cart';
+      post 'update_address' => 'address#update_address';
+      delete 'delete_from_cart/:id' => 'cart#delete_item'
+      post 'cancel_order' => 'order#cancel_order';
+      put 'create_order' => 'cart#create_order';
 
 
     end
@@ -110,15 +255,15 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :seller do
-      get 'find_home_cats'=>'inventory#find_selling_cats'
+      get 'find_home_cats' => 'inventory#find_selling_cats'
       get 'finance_management/find_finance_summary'
       get 'customer_management/find_customers'
       get 'customer_management/find_customer_details/:user_id' => 'customer_management#find_customer_details'
       get 'order_management/find_all_orders'
       get 'order_management/find_orders_by_type/:status' => 'order_management#find_orders_by_type'
-      get 'order_management/find_order_details/:order_id'   => 'order_management#order_details'
+      get 'order_management/find_order_details/:order_id' => 'order_management#order_details'
       get 'order_management/trigger_favor'
-      get 'order_management/find_order_items/:order_id'   => 'order_management#find_order_items'
+      get 'order_management/find_order_items/:order_id' => 'order_management#find_order_items'
       get 'order_management/find_tmr_orders' => 'order_management#find_tmr_orders'
       get 'order_management/find_tmr_orders/:date' => 'order_management#find_tmr_orders'
       get 'item/find_single_item'
@@ -137,7 +282,6 @@ Rails.application.routes.draw do
   end
 
   resources :messages
-
 
 
   # The priority is based upon order of creation: first created -> highest priority.

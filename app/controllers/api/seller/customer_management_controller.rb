@@ -15,9 +15,9 @@ class Api::Seller::CustomerManagementController < ApplicationController
   def find_customer_history
     customer_user_id = params[:customer_id]
     user_id = session[:user_id]
-    orders = Order.where user_id: user_id, buyer_user_id: customer_user_id
+    # orders = Order.where user_id: user_id, buyer_user_id: customer_user_id
 
-    render json: orders
+    # render json: orders
   end
 
 end

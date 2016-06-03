@@ -7,7 +7,6 @@ buyer_user:
   pw: test1_pw
   phone:  1234567
   address1: address1
-  address2: address2
   postcode: test post
   city_id:  1
   user_type: 1
@@ -20,7 +19,6 @@ buyer_user2:
   pw: 827ccb0eea8a706c4c34a16891f84e7b
   phone:  11234567
   address1: address1
-  address2: address2
   postcode: test post
   city_id:  1
   user_type: 1
@@ -36,7 +34,6 @@ seller_user:
   pw: 827ccb0eea8a706c4c34a16891f84e7b
   phone:  21234567
   address1: address1
-  address2: address2
   postcode: test post
   city_id:  1
   user_type: 2

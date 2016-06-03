@@ -4,7 +4,7 @@ class Api::Buyer::AccountManagementController < ApplicationController
     #获取各种状态下的订单 完成的 进行中的 待付款的
     status=params[:status]
     user_id = session[:user_id]
-    orders = Order.where buyer_user_id: user_id, status: status
+    orders = Order.where user_id: user_id, status: status
     render json: orders
   end
 
@@ -16,20 +16,6 @@ class Api::Buyer::AccountManagementController < ApplicationController
     render text: count
   end
 
-  def find_user_default_address
-    #获取卖家地址
-    user_id = session[:user_id]
-    address = Address.find_by(user_id: user_id, is_default: true)
-    render json: address
-  end
-
-  def find_user_addresses
-    #获取卖家地址
-    user_id = session[:user_id]
-    addresses = Address.where user_id: user_id
-    render json: addresses
-  end
-
   def do_buyer_verification
     #验证卖家信息
 
@@ -37,31 +23,6 @@ class Api::Buyer::AccountManagementController < ApplicationController
   end
 
 
-  def update_address
-    id=params[:id]
-    addr1 = params[:aaddress_1]
-    addr2 = params[:aaddress_2]
-    postcode = params[:postcode]
-    district = District.find params[:district_id]
-    city = City.find params[:city_id]
-    phone = params[:phone]
-
-    address = Address.find id
-    address.user_id = session[:user_id]
-    address.address1=addr1
-    address.address2 = addr2
-    address.postcode=postcode
-    address.district=district
-    address.city=city.name
-    address.telephone=phone
-    if address.save
-      render text: true
-    else
-      render text: false
-    end
-
-
-  end
 
   def remove_address
     id=params[:id]
@@ -89,10 +50,6 @@ class Api::Buyer::AccountManagementController < ApplicationController
 
   end
 
-
-  def get_address_params
-    params[:address].permit(:address)
-  end
 
 
 end

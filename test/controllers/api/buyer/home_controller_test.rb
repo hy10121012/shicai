@@ -13,6 +13,13 @@ class Api::Buyer::HomeControllerTest < ActionController::TestCase
   end
 
 
+  test "test home page get ads item" do
+    get :find_ads_items
+    body = JSON.parse(response.body)
+    assert body.size ==5
+    assert body[0]['name'] == 'meat'
+  end
+
 
 
 

@@ -3,10 +3,10 @@ class CreateAddresses < ActiveRecord::Migration
     create_table :addresses do |t|
       t.references :user, index: true
       t.string :address1
-      t.string :address2
-      t.string :district
-      t.string :city
-      t.string :provence
+      t.integer :street_id
+      t.integer :district_id
+      t.integer :city_id
+      t.integer :province_id
       t.integer :postcode
       t.boolean :is_default
       t.integer :telephone

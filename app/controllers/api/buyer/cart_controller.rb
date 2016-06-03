@@ -1,14 +1,28 @@
 class Api::Buyer::CartController < ApplicationController
   def find_current_cart_list
     #获取当前购物车
-    cart_items = Cart.where :user_id => session[:user_id]
-    render json: cart_items
+    cart_items = Cart.eager_load(:item).where :user_id => session[:user_id]
+
+
+    return_map = {}
+    return_map[:user] = User.find(session[:user_id])
+
+    item_arr = []
+    cart_items.each do |item|
+      attr = item.attributes
+      attr[:item] = item.item
+      attr[:unit] = Unit.find_unit_by_item_id item.item.unit_id
+      attr[:pic] = Item.get_item_pic item.item
+      item_arr.push(attr)
+    end
+    return_map[:items] = item_arr
+    render json: return_map
   end
 
   def update_quantity
     #修改购物车价格
-    item_id = params[:item_id]
-    item = Cart.find_by :user_id => session[:user_id], :item_id => item_id
+    cart_id = params[:id]
+    item = Cart.find_by :id => session[:user_id], :id => cart_id
     qty = params[:quantity]
     item.quantity = qty
     if item.save
@@ -20,8 +34,8 @@ class Api::Buyer::CartController < ApplicationController
 
   def delete_item
     #从购物车内删除货品
-    item_id = params[:item_id]
-    if Cart.delete :user_id => session[:user_id], :item_id => item_id
+    cart_id = params[:id]
+    if Cart.find_by(:user_id => session[:user_id], :id => cart_id).destroy
       render text: true
     else
       render text: false
@@ -30,41 +44,32 @@ class Api::Buyer::CartController < ApplicationController
 
   def create_order
     #下单
-    items = params[:item_pics]
+    items = params[:items]
     address_id = params[:address_id]
-    comment = params[:comment]
-    buyer_id = session[:user_id]
-    address_detail = Address.find address_id
-    delivery_time = params[:delivery_time]
-    orders = {}
-    state = {"qty" => {}, "amount" => {}}
+    address_detail = Address.find_address address_id
+    delivery_time = params[:date].gsub(/\D/, '')+params[:time].to_s
+    amt = 0
     items.each do |item|
-      if orders[item['user_id']].nil?
-        orders[item['user_id']] = []
-        state["qty"][item['user_id']] = 0
-        state["amount"][item['user_id']] = 0
-      end
-      orders[item['user_id']].push(item)
-      qty = item["quantity"].to_i
-      state["qty"][item['user_id']] += qty
-      price = item["price"].to_f
-      state["amount"][item['user_id']] += qty * price
+      amt += item['quantity'] * item['item']['price']
     end
+    id = nil
     Item.transaction do
-      orders.each do |seller_id, items|
-        addr_text = address_detail.address1+"\n"+address_detail.address2+"\n"+address_detail.district+"\n"+address_detail.city
-        order = Order.new :buyer_user_id => buyer_id, :delivery_address => addr_text, :delivery_date_time => delivery_time, :user_id => seller_id, :comment => comment, :status => OrderStatus::NEW, :quantity => state["qty"][seller_id], :amount => state["amount"][seller_id]
-        order.save
-        create_order_items order.id, items
-      end
+      addr_text = address_detail['name']+"|"+address_detail['address1']+"|"+address_detail[:street]+"|"+address_detail[:district]+"|"+address_detail[:city]
+
+      order = Order.new :delivery_address => addr_text, :delivery_date_time => delivery_time, :user_id => session[:user_id],  :status => OrderStatus::PAYABLE,  :amount => amt
+      order.save
+      id = order.id
+
+      create_order_items order.id, items
+      Cart.delete_all :user_id => session[:user_id]
     end
-    render :text => true
+    render text: id
   end
 
   private
   def create_order_items order_id, items
     items.each do |item|
-      order_item = OrderItem.new :order_id => order_id, :item_id => item["item_id"], :price => item["price"], :quantity => item["quantity"]
+      order_item = OrderItem.new :order_id => order_id, :item_id => item["item"]["id"], :price => item["item"]["price"], :quantity => item["quantity"]
       order_item.save
     end
   end

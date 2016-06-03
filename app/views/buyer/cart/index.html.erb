@@ -1,24 +1,72 @@
-<div ng-controller="cartCtrl">
-  <div>
-    {{default_address.address1}}
-  </div>
-  <div>
-    {{default_address.address2}}
-  </div>
-  <div>
-    {{default_address.district}}
-  </div>
-  <div>
-    {{default_address.city}}
-  </div>
-  <div>
-    {{default_address.pp}}
-  </div>
+<div class="buyer-shopping-cart" ng-controller="cartCtrl" ng-init="init(<%= @addressi_id %>)">
+    <div ng-if="cart_items.length>0">
+      <div class="buyer-shopping-cart__address">
+        <div class="buyer-shopping-cart__address-left">
+          <div class="buyer-shopping-cart__address-heading">收货地址</div>
+          <div class="buyer-shopping-cart__address-content">
+            <div class="buyer-shopping-cart__address-row">{{address.name}} {{address.telephone}}</div>
+            <div class="buyer-shopping-cart__address-row">{{address.province}} {{address.city}}</div>
+            <div class="buyer-shopping-cart__address-row">{{address.district}} {{address.street}} {{address.address1}}
+            </div>
+          </div>
+        </div>
+        <div class="buyer-shopping-cart__address-right">
+          <div class="buyer-shopping-cart__address-button"><a href="/change_addr">更换地址</a></div>
+        </div>
+      </div>
+      <div style="border-bottom: 1px solid #ececec;padding-bottom: 3px;padding-top: 1px;margin-bottom: 5px;height: 40px;">
+        <div class='' style="padding-left:10px;width:25%; float: left;line-height: 40px;">
+          送货时间：
+        </div>
+        <div class='' style="width:75%; float: left">
 
-
-  <div ng-repeat="item in cart_items">
-    {{item.item_id}}
-  </div>
-
-
+          <div class='input-group date'>
+            <input type='text' style="width:65%;" class="form-control " value="" id='datetimepicker1'/>
+            <select id="time" class="form-control" style="width:35%;">
+              <% [8, 10].to_a.each do |time| %>
+                  <option
+                  <% if time==10 %> selected="selected"
+                  <% end %>  value="<%= time %>"><%= time %>:00AM
+                  </option>
+              <% end %>
+            </select>
+          </div>
+        </div>
+        <div class="clear" style="clear: both"></div>
+      </div>
+      <script type="text/javascript">
+        $(function () {
+          $('#datetimepicker1').datetimepicker({defaultDate: "<%=@date_str%>", format: 'YYYY年MM月DD日'});
+        });
+      </script>
+      <div class="buyer-shopping-cart__items">
+        <div class="buyer-shopping-cart__item" ng-repeat="cart_item in cart_items">
+          <div class="buyer-shopping-cart__thumbnail" background-image="{{ cart_item.pic }}"></div>
+          <div class="buyer-shopping-cart__item-body">
+            <div class="buyer-shopping-cart__item-line">
+              <div>{{ cart_item.item.name }}</div>
+              <div class="buyer-shopping-cart__item-seller"></div>
+            </div>
+            <div class="buyer-shopping-cart__item-line">
+              <div class="buyer-shopping-cart__item-price">{{ cart_item.item.price }}/{{ cart_item.unit }}</div>
+              <div ng-click="delete(cart_item)" class="buyer-shopping-cart__item-remove">删除</div>
+              <div class="counter">
+                <div class="counter__button counter__button--minus-one" ng-click="increment(cart_item,-1)">-</div>
+                <input type="text" class="counter__quantity" style="border-width: 1px; " value="{{ cart_item.quantity }}"/>
+                <div class="counter__button counter__button--plus-one" ng-click="increment(cart_item,1)">+</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="buyer-shopping-cart__summary">
+        <div class="buyer-shopping-cart__total">总计: {{total}}元</div>
+        <div class="buyer-shopping-cart__submit" ng-click="sendOrder()">确认提交</div>
+      </div>
+    </div>
+    <div ng-if="cart_items.length==0" style="text-align: center;padding-top: 40%">
+      <h3 style="color: grey">您的购物车还是空的</h3>
+    </div>
 </div>
+
+

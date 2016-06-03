@@ -1,0 +1,20 @@
+<div style="padding-top: 44px; height: 100%">
+  <div class="buyer-product-result__items">
+    <% @items.each do |item| %>
+        <a href="/item/<%= item['id'] %>" class="buyer-product-result__item">
+          <div class="buyer-product-result__thumbnail" background-image="<%= item['pic'] %>"></div>
+          <div class="buyer-product-result__item_body">
+            <div class="buyer-product-result__info">
+              <span class="buyer-product-result__item-title"><%= item['name'] %></span>
+              <span class="buyer-product-result__item-description"><%= item['description'] %></span>
+            </div>
+            <div class="buyer-product-result__item-meta">
+
+              <div class="buyer-product-result__price"><%= item['price'] %></div>
+            </div>
+          </div>
+        </a>
+    <% end %>
+  </div>
+</div>
+</div>

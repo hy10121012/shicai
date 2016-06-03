@@ -3,10 +3,10 @@
 one:
   user_id: 1
   address1: address1
-  address2: address2
-  district: 1
+  street_id: street_id
+  district_id: 1
   city: 1
-  provence: 1
+  province_id: 1
   postcode: 530022
   is_default: false
   telephone: 13707710589
@@ -14,10 +14,10 @@ one:
 two:
   user_id: 1
   address1: address1
-  address2: address2
-  district: 1
+  street_id: street_id
+  district_id: 1
   city: 1
-  provence: 1
+  province_id: 1
   postcode: 344522
   is_default: false
   telephone: 15077322112

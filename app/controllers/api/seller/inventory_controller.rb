@@ -13,11 +13,7 @@ class Api::Seller::InventoryController < ApplicationController
         return_map[cat_name]=[]
       end
       attr  = item.attributes
-      if !item.profile_pic.nil?
-        attr[:pic] = item.profile_pic.picture_s_url
-      else
-        attr[:pic] = "images/default.jpg"
-      end
+      attr[:pic] =  Item.get_item_pic item
       return_map[cat_name].push(attr)
 
     end

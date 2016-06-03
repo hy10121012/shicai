@@ -1,24 +1,23 @@
-<div class="buyer-landing">
-  <div class="buyer-landing" ng-controller="homeCtrl">
-    <div class="buyer-landing__banner" background-image="/img/buyer/landing-banner.jpg">
-      <div class="buyer-landing__logo" background-image="/img/buyer/landing-logo.png"></div>
-    </div>
-    <div class="buyer-landing__categories">
-      <a href="#/buyer/products" class="buyer-landing__category" ng-repeat="cat in cats">
-        <div class="buyer-landing__category-icon" background-image="/img/buyer/cat/{{cat.id}}.png"></div>
-        <div class="buyer-landing__category-label">  {{cat.name}}</div>
-      </a>
-    </div>
-    <div class="buyer-landing__search">
-      <div class="buyer-landing__search-title">今日推荐</div>
-      <a href="#/buyer/product-detail" class="buyer-landing__search-item" ng-repeat="item in items" >
-        <div class="buyer-landing__search-image" background-image="{{ item.pic }}"></div>
-        <div class="buyer-landing__search-content">
-          <span class="buyer-landing__item-name">{{ item.name }}</span>
-          <span class="buyer-landing__item-price">{{ item.price }}</span>
-          <div class="buyer-landing__item-description">{{ item.description }}</div>
-          <div class="buyer-landing__item-seller">{{ item.seller }}</div>
-        </div>
-    </div>
+<div class="buyer-landing"  ng-controller="homeCtrl">
+  <div class="buyer-landing__banner" background-image="/img/buyer/landing-banner.jpg">
+    <div class="buyer-landing__logo" background-image="/img/buyer/landing-logo.png"></div>
+  </div>
+  <div class="buyer-landing__categories">
+    <a href="/category/{{cat.id}}" class="buyer-landing__category" ng-repeat="cat in cats">
+      <div class="buyer-landing__category-icon" background-image="/img/buyer/cat/{{cat.id}}.png"></div>
+      <div class="buyer-landing__category-label"> {{cat.name}}</div>
+    </a>
+  </div>
+  <div class="buyer-landing__search">
+    <div class="buyer-landing__search-title">今日推荐</div>
+    <a href="/item/{{item.id}}" class="buyer-landing__search-item" ng-repeat="item in items">
+      <div class="buyer-landing__search-image" background-image="{{ item.pic }}"></div>
+      <div class="buyer-landing__search-content">
+        <span class="buyer-landing__item-name">{{ item.name }}</span>
+        <span class="buyer-landing__item-price">{{ item.price }}/{{ item.unit }}</span>
+        <div class="buyer-landing__item-description">{{ item.description }}</div>
+        <div class="buyer-landing__item-seller">{{ item.seller }}</div>
+      </div>
+    </a>
   </div>
 </div>

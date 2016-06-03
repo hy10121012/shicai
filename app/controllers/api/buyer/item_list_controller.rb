@@ -8,7 +8,8 @@ class Api::Buyer::ItemListController < ApplicationController
     return_map = []
     items.each do |item|
       attr = item.attributes
-      attr[:pic] = item.profile_pic.picture_s_url
+      attr[:pic] = Item.get_item_pic item
+      attr[:unit] = Unit.find_unit_by_item_id item.unit_id
       return_map.push(attr)
     end
 
@@ -22,7 +23,7 @@ class Api::Buyer::ItemListController < ApplicationController
       return_map = []
       items.each do |item|
         attr = item.attributes
-        attr[:pic] = item.profile_pic.picture_s_url
+        attr[:pic] =  Item.get_item_pic item
         return_map.push(attr)
       end
       render json: return_map
@@ -45,23 +46,43 @@ class Api::Buyer::ItemListController < ApplicationController
     render json: sub_cats
   end
 
+  def find_sub_cats_by_cat
+    #子类页面获取顶部菜单（同大类内子类）
+    cat_id = params[:cat_id]
+    sub_cats = SubCat.where :category_id=>cat_id
+
+    render json: sub_cats
+  end
+
   def find_item_detail
     #获取货品详细信息
-    render json: Item.find(params[:item_id])
+    item = Item.find(params[:item_id])
+    attr = item.attributes
+    attr[:pic] =  Item.get_item_pic item
+    attr[:unit] =Unit.find_unit_by_item_id item.unit_id
+
+    render json:attr
+
+
   end
 
   def add_to_cart
     #添加货品到购物车
-    params[:item_id]
+    item_id = params[:item_id]
     user_id = session[:user_id]
-    qty = params[:qty]
-    deliver_date_time = params[:diliver]
-    cart_item = Cart.new
-    cart_item.user_id = user_id
-    cart_item.quantity = qty
-    cart_item.delivery_date_time=deliver_date_time
-    cart_item.save
+    qty = params[:quantity]
 
+    cart_item = Cart.find_by :item_id=>item_id,:user_id=>user_id
+    if(!cart_item.nil?)
+      cart_item.quantity +=qty
+      cart_item.save
+    else
+      cart_item = Cart.new
+      cart_item.user_id = user_id
+      cart_item.item_id = item_id
+      cart_item.quantity = qty
+      cart_item.save
+    end
     render text: "true"
   end
 
