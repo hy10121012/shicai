@@ -2,9 +2,8 @@
   <div ng-if="order.status=='<%=OrderStatus::PAYABLE%>'" class="buyer-order-detail__title"><a ng-click="cancelOrder()"  class="cancel_button" >取消订单</a> <a href="/payment/<%=@order_id%>"  class="confirm_button" >立即支付</a> </div>
   <div ng-if="order.status=='<%=OrderStatus::TO_DELIVER%>' && order.delivery_date_time*1> <%=@date_str%>*1" class="buyer-order-detail__title"><a ng-click="cancelOrder()"  class="cancel_button" >取消订单</a> <span style="color: grey"> 下单当日晚上12点前可以取消订单 </span></div>
   <div ng-if="order.status=='<%=OrderStatus::DELIVERED%>'" class="buyer-order-detail__title"><a ng-click="confirmDelivered()"  class="confirm_button" >确认收货</a> <a ng-click="complaint()"  class="cancel_button" >我要投诉</a></div>
-  <div ng-if="order.status=='<%=OrderStatus::TO_COMMENT%>'" class="buyer-order-detail__title"><a ng-click="/feedback/<%=@order_id%>"  class="confirm_button" >评论此次交易</a> </div>
+  <div ng-if="order.status=='<%=OrderStatus::TO_COMMENT%>'" class="buyer-order-detail__title"><a href="/feedback/<%=@order_id%>"  class="confirm_button" >评论此次交易</a> </div>
   <div class="buyer-order-detail__metadata">
-    <div class="buyer-order-detail__metadata-item" >下单日期:<span style="float: right;">{{order.order_taken_date_time_str}}</span> </div>
     <div class="buyer-order-detail__metadata-item" >送货日期: <span style="float: right;" >{{order.delivery_date_time_str}}</span></div>
     <div class="buyer-order-detail__metadata-item">货单号: <span style="float: right;" >  {{order.id}}</span> </div>
     <div class="buyer-order-detail__metadata-item">付款:  <span style="float: right;" >{{order.amount}}元</span></div>

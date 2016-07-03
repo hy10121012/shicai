@@ -1,4 +1,4 @@
-<div ng-controller="itemDetailCtrl" ng-init="init(<%=@id%>)">
+<div ng-controller="itemDetailCtrl" ng-init="init(<%= @id %>)">
   <div class="buyer-product-detail__image" style='background-image:url("{{item.pic}}")'></div>
   <div class="buyer-product-detail__line buyer-product-detail__line--1">
     <div class="buyer-product-detail__line-container">
@@ -7,19 +7,28 @@
     </div>
     <div class="buyer-product-detail__counter counter">
       <div class="counter__button counter__button--minus-one" ng-click="increment(-1)">-</div>
-      <input type="text" class="counter__quantity" ng-model="quantity" />
+      <input type="text" class="counter__quantity" ng-model="quantity"/>
       <div class="counter__button counter__button--plus-one" ng-click="increment(1)">+</div>
     </div>
   </div>
+  <div class="buyer-product-detail__line buyer-product-detail__line--1">
+    <div class="buyer-product-detail__line-container">
+      总价: {{item.price * quantity}}
+    </div>
+    <div class="buyer-product-detail__counter counter" style="width: 50%">
+      <% if is_verified %>
+          <div class="buyer-product-detail__button" ng-click="addToCart()">放入购物车</div>
+      <% else %>
+          <div class="buyer-product-detail__button" style="color: #000000;background-color: #ececec;border: 1px solid #ececec;width: 100%">未通过验证，无法购买</div>
+      <% end %>
+    </div>
+  </div>
+
   <div class="buyer-product-detail__line buyer-product-detail__line--2">
-    <!--<div class="buyer-product-detail__title">商家 金三胖肉铺</div>-->
     <div class="buyer-product-detail__description">{{item.description}}</div>
   </div>
-  <div class="buyer-product-detail__line buyer-product-detail__line--3">
-    <div class="buyer-product-detail__title">总价: {{item.price * quantity}}</div>
-  </div>
-  <div class="buyer-product-detail__buttons">
-    <div class="buyer-product-detail__button" ng-click="addToCart()">放入购物车</div>
+
+
     <!--<div class="buyer-product-detail__button">立即购买</div>-->
   </div>
 </div>

@@ -22,7 +22,7 @@ class Item < ActiveRecord::Base
   end
 
   def self.find_frequent_item(user_id, cat_id)
-    find_by_sql ["select i.*,oi.item_id,count(oi.order_id) total from orders o left join order_items oi on o.id=oi.order_id join items i on i.id=oi.item_id join sub_cats sc on sc.id= i.sub_cat_id where sc.category_id=? and o.user_id=? group by oi.item_id order by total desc", cat_id.to_i, user_id]
+    find_by_sql ["select i.*,oi.item_id,count(oi.order_entity_id) total from orders o left join order_items oi on o.entity_id=oi.order_entity_id and o.is_latest_version=1 join items i on i.id=oi.item_id join sub_cats sc on sc.id= i.sub_cat_id where sc.category_id=? and o.user_id=? group by oi.item_id order by total desc", cat_id.to_i, user_id]
   end
 
 

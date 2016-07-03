@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160527053627) do
+ActiveRecord::Schema.define(version: 20160703150716) do
 
   create_table "addresses", force: true do |t|
     t.integer  "user_id"
@@ -29,6 +29,26 @@ ActiveRecord::Schema.define(version: 20160527053627) do
   end
 
   add_index "addresses", ["user_id"], name: "index_addresses_on_user_id", using: :btree
+
+  create_table "aggregated_order_items", force: true do |t|
+    t.integer  "order_item_id"
+    t.integer  "aggregated_order_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "aggregated_order_items", ["aggregated_order_id"], name: "index_aggregate_order_items_on_aggregated_order_id", using: :btree
+  add_index "aggregated_order_items", ["order_item_id"], name: "index_aggregate_order_items_on_order_item_id", using: :btree
+
+  create_table "aggregated_orders", force: true do |t|
+    t.integer  "executer_id"
+    t.integer  "supplier_id"
+    t.integer  "delivery_date_time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "aggregated_orders", ["supplier_id"], name: "index_aggregated_orders_on_supplier_id", using: :btree
 
   create_table "api_buyer_carts", force: true do |t|
     t.integer  "user_id"
@@ -165,11 +185,28 @@ ActiveRecord::Schema.define(version: 20160527053627) do
   add_index "items", ["unit_id"], name: "index_items_on_unit_id", using: :btree
   add_index "items", ["user_id"], name: "index_items_on_user_id", using: :btree
 
+  create_table "logistic_area_streets", force: true do |t|
+    t.integer  "logistic_area_id"
+    t.integer  "street_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "logistic_area_streets", ["logistic_area_id"], name: "index_logistic_area_streets_on_logistic_area_id", using: :btree
+  add_index "logistic_area_streets", ["street_id"], name: "index_logistic_area_streets_on_street_id", using: :btree
+
+  create_table "logistic_areas", force: true do |t|
+    t.string   "name"
+    t.string   "coors"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "order_items", force: true do |t|
-    t.integer  "order_id"
+    t.integer  "order_entity_id"
     t.integer  "item_id"
-    t.float    "price",      limit: 24
-    t.integer  "quantity",   limit: 8
+    t.float    "price",           limit: 24
+    t.integer  "quantity",        limit: 8
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -177,17 +214,19 @@ ActiveRecord::Schema.define(version: 20160527053627) do
   create_table "orders", force: true do |t|
     t.text     "delivery_address"
     t.integer  "delivery_date_time"
-    t.integer  "order_taken_date_time"
     t.text     "comment"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "status"
-    t.integer  "quantity"
     t.integer  "amount"
-    t.integer  "pay_date_time"
+    t.integer  "entity_id"
+    t.integer  "version"
+    t.boolean  "is_latest_version"
+    t.integer  "address_id"
   end
 
+  add_index "orders", ["address_id"], name: "index_orders_on_address_id", using: :btree
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "payment_methods", force: true do |t|
@@ -195,6 +234,21 @@ ActiveRecord::Schema.define(version: 20160527053627) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "payments", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "order_entity_id"
+    t.integer  "entity_id"
+    t.integer  "version"
+    t.boolean  "is_latest_version"
+    t.integer  "amount"
+    t.string   "payment_method"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "payments", ["user_id"], name: "index_payments_on_user_id", using: :btree
 
   create_table "promotions", force: true do |t|
     t.integer  "item_id"
@@ -211,14 +265,24 @@ ActiveRecord::Schema.define(version: 20160527053627) do
     t.datetime "updated_at"
   end
 
+  create_table "ratings", force: true do |t|
+    t.integer  "order_entity_id"
+    t.integer  "rating"
+    t.string   "comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "streets", force: true do |t|
     t.string   "name"
     t.integer  "district_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "logistic_area_id"
   end
 
   add_index "streets", ["district_id"], name: "index_streets_on_district_id", using: :btree
+  add_index "streets", ["logistic_area_id"], name: "index_streets_on_logistic_area_id", using: :btree
 
   create_table "sub_cats", force: true do |t|
     t.string   "name"
@@ -228,6 +292,31 @@ ActiveRecord::Schema.define(version: 20160527053627) do
   end
 
   add_index "sub_cats", ["category_id"], name: "index_sub_cats_on_category_id", using: :btree
+
+  create_table "supplier_items", force: true do |t|
+    t.integer  "supplier_id"
+    t.integer  "item_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.float    "wholesale_price", limit: 24
+    t.float    "retail_price",    limit: 24
+  end
+
+  add_index "supplier_items", ["item_id"], name: "index_supplier_items_on_item_id", using: :btree
+  add_index "supplier_items", ["supplier_id"], name: "index_supplier_items_on_supplier_id", using: :btree
+
+  create_table "suppliers", force: true do |t|
+    t.string   "name"
+    t.string   "owner"
+    t.string   "phone"
+    t.string   "address"
+    t.integer  "capability"
+    t.integer  "category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "suppliers", ["category_id"], name: "index_suppliers_on_category_id", using: :btree
 
   create_table "units", force: true do |t|
     t.string   "text"
@@ -252,9 +341,6 @@ ActiveRecord::Schema.define(version: 20160527053627) do
     t.string   "email"
     t.string   "pw"
     t.string   "phone"
-    t.string   "address1"
-    t.string   "address2"
-    t.integer  "postcode"
     t.integer  "city_id"
     t.integer  "user_type"
     t.datetime "created_at"

@@ -1,17 +1,17 @@
-<div class="seller-login">
-  <div class="seller-login__header">
-    <div class="seller-login__logo" background-image="/img/logo.png"></div>
+<div class="login">
+  <div class="login__header">
+    <div class="login__logo" background-image="/img/logo.png"></div>
   </div>
-  <div class="seller-login__container" ng-controller="loginCtrl">
-    <form novalidate class="login-form seller-login__form">
-      <input type="text" ng-model="user.name" class="seller-login__input seller-login__input--username" placeholder="用户名">
-      <input type="password" ng-model="user.pwd" class="seller-login__input seller-login__input--password" placeholder="密码">
-      <div class="seller-login__buttons">
-        <input type="submit" class="seller-login__button seller-login__button--submit" ng-click="login(user)" value="登录"/>
+  <div class="login__container" ng-controller="loginCtrl">
+    <form novalidate class="login-form login__form">
+      <input type="text" ng-model="user.name" class="login__input login__input--username" placeholder="用户名">
+      <input type="password" ng-model="user.pwd" class="login__input login__input--password" placeholder="密码">
+      <div class="login__buttons">
+        <input type="submit" class="login__button login__button--submit" ng-click="login(user)" value="登录"/>
       </div>
-      <div class="seller-login__buttons">
-        <div class="seller-login__button seller-login__button--forgot-password">忘记密码?</div>
-        <div class="seller-login__button seller-login__button--forgot-password">快速注册</div>
+      <div class="login__buttons">
+        <div class="login__button login__button--forgot-password">忘记密码?</div>
+        <a href="/register"><div class="login__button login__button--forgot-password">快速注册</div></a>
       </div>
 
 

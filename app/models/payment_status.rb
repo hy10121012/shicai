@@ -1,0 +1,5 @@
+class PaymentStatus
+  PAID = 'PAID'
+  REFUND_PENDING = 'REFUND_PENDING'
+  REFUNDED = 'REFUNDED'
+end

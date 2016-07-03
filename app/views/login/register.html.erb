@@ -1,2 +1,96 @@
-<h1>Login#do_login</h1>
-<p>Find me in app/views/login/do_login.html.erb</p>
+<div class="register" ng-controller="registerCtrl" ng-init="init()">
+  <div ng-show="topPart" class="register-container">
+    <div class="register-container-row">
+      <div class="register-cell">
+        手机号码
+      </div>
+      <div class="register-cell" style="width: 50%">
+        <input class="register-text_field" id="number" ng-model="number" ng-blur="validate_number()" placeholder="请输入手机号码" type="text"/>
+      </div>
+      <div class="register-cell" style="border-left: 1px solid #ececec;padding-left: 5px;">
+        <a ng-if="sentCode==false" ng-click="sendCode()" class="confirm_button">发送验证码</a>
+        <a ng-if="sentCode==true" class="register-diabled_button">重新发送({{countdown}})</a>
+      </div>
+    </div>
+    <div class="register-container-row">
+      <div class="register-cell">
+        验证码
+      </div>
+      <div class="register-cell" style="width: 50%">
+        <input ng-model="code" size="4" class="register-text_field" placeholder="请输入收到的验证码" value="" type="number"/>
+      </div>
+    </div>
+    <div class="register-container-row">
+      <div class="register-cell">
+        密码
+      </div>
+      <div class="register-cell" style="width: 50%">
+        <input ng-model="password" class="register-text_field" placeholder="设置您的密码" type="password" ng-blur="validate_code()"/>
+      </div>
+      <div class="register-cell">
+        <span id="password_label" style="color: #b9b9b9">6-10位密码</span>
+      </div>
+    </div>
+    <div class="register-container-row" style="margin-top: 20px; border: 0px;">
+      <a ng-if="code.toString().length==4" ng-click="next()" class="register-confirm_button" style="width: 100%;line-height: inherit">下一步</a>
+      <div ng-if="!code || code.toString().length!=4" class="register-diabled_button" style="width: 100%;line-height: inherit">下一步</div>
+    </div>
+  </div>
+  <div ng-show="bottomPart" class="register-container">
+    <div class="register-container-row">
+      <div class="register-cell">
+        姓名
+      </div>
+      <div class="register-cell" style="width: 50%">
+        <input class="register-text_field" id="name" ng-model="name" placeholder="请您的姓名" type="text"/>
+      </div>
+
+    </div>
+    <div class="register-container-row">
+      <div class="register-cell">
+        餐厅名称
+      </div>
+      <div class="register-cell" style="width: 50%">
+        <input class="register-text_field" id="res_name" ng-model="address.res_name" placeholder="请您餐厅的名称" type="text"/>
+      </div>
+
+    </div>
+    <div class="register-container-row">
+      <div class="register-cell">
+        详细地址
+      </div>
+      <div class="register-cell" style="width: 50%">
+        <input ng-model="address.address1" size="4" class="register-text_field" placeholder="请输您餐馆的详细地址" value="" type="text"/>
+      </div>
+    </div>
+    <div class="register-container-row">
+      <div class="register-cell" style="width: 50%">省
+        <select ng-model="address.province_id" ng-change="loadCity()" class="register-dropdown">
+          <option value="1" >广西壮族自治区</option>
+        </select>
+      </div>
+      <div class="register-cell" style="width: 50%">市
+        <select ng-model="address.city_id" ng-change="loadDistrict()"  class="register-dropdown">
+          <option value="{{city.id}}" ng-repeat="city in cities">{{city.name}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="register-container-row">
+      <div class="register-cell" style="width: 50%">区
+        <select ng-model="address.district_id" ng-change="loadStreet()" class="register-dropdown">
+          <option value="{{district.id}}" ng-repeat="district in districts">{{district.name}}</option>
+        </select>
+      </div>
+      <div class="register-cell" style="width: 50%">街道
+        <select ng-model="address.street_id" class="register-dropdown">
+          <option value="{{street.id}}" ng-repeat="street in streets">{{street.name}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="register-container-row" style="margin-top: 20px; border: 0px;">
+      <a ng-if="code.toString().length==4" ng-click="register()" class="register-confirm_button" style="width: 100%;line-height: inherit">注册</a>
+      <div ng-if="!code || code.toString().length!=4" class="register-diabled_button" style="width: 100%;line-height: inherit">注册</div>
+    </div>
+  </div>
+</div>

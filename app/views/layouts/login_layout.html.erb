@@ -15,8 +15,13 @@
   <%= javascript_tag "var AUTH_TOKEN = '#{form_authenticity_token}';" if protect_against_forgery? %>
 </head>
 <body>
-
-
+<% if showRegister%>
+<div class="buyer-header" title="首页" ng-controller="topNavCtrl">
+  <div class="buyer-header__title">
+    <span><%= @title %></span>
+  </div>
+</div>
+<%end%>
 <div class="view">
   <%= yield %>
 </div>

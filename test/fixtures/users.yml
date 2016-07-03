@@ -6,8 +6,6 @@ buyer_user:
   email: test1@test.com
   pw: test1_pw
   phone:  1234567
-  address1: address1
-  postcode: test post
   city_id:  1
   user_type: 1
   token: 12345676
@@ -18,8 +16,6 @@ buyer_user2:
   email: test2@test.com
   pw: 827ccb0eea8a706c4c34a16891f84e7b
   phone:  11234567
-  address1: address1
-  postcode: test post
   city_id:  1
   user_type: 1
   token: 212345676
@@ -33,8 +29,6 @@ seller_user:
   email: test3@test.com
   pw: 827ccb0eea8a706c4c34a16891f84e7b
   phone:  21234567
-  address1: address1
-  postcode: test post
   city_id:  1
   user_type: 2
   token: 2123456744

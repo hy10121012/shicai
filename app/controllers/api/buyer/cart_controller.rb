@@ -56,11 +56,11 @@ class Api::Buyer::CartController < ApplicationController
     Item.transaction do
       addr_text = address_detail['name']+"|"+address_detail['address1']+"|"+address_detail[:street]+"|"+address_detail[:district]+"|"+address_detail[:city]
 
-      order = Order.new :delivery_address => addr_text, :delivery_date_time => delivery_time, :user_id => session[:user_id],  :status => OrderStatus::PAYABLE,  :amount => amt
+      order = Order.new :delivery_address => addr_text, :delivery_date_time => delivery_time, :user_id => session[:user_id],  :status => OrderStatus::PAYABLE,  :amount => amt,  :version => 0,  :is_latest_version => true,  :entity_id => Order.find_next_entity_id
       order.save
       id = order.id
 
-      create_order_items order.id, items
+      create_order_items order.entity_id, items
       Cart.delete_all :user_id => session[:user_id]
     end
     render text: id
@@ -69,7 +69,7 @@ class Api::Buyer::CartController < ApplicationController
   private
   def create_order_items order_id, items
     items.each do |item|
-      order_item = OrderItem.new :order_id => order_id, :item_id => item["item"]["id"], :price => item["item"]["price"], :quantity => item["quantity"]
+      order_item = OrderItem.new :order_entity_id => order_id, :item_id => item["item"]["id"], :price => item["item"]["price"], :quantity => item["quantity"]
       order_item.save
     end
   end

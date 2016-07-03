@@ -1,146 +1,17 @@
 Rails.application.routes.draw do
 
+
+
   namespace :api do
   namespace :buyer do
-    get 'payment/payment'
+    get 'register/register'
     end
   end
 
   namespace :api do
   namespace :buyer do
-    get 'payment/payment_callback'
+    get 'register/submit_details'
     end
-  end
-
-  namespace :buyer do
-  get 'payment/payment'
-  end
-
-  namespace :buyer do
-  get 'payment/payment_callback'
-  end
-
-  namespace :api do
-  namespace :buyer do
-    get 'order/order_details'
-    end
-  end
-
-  namespace :api do
-  namespace :buyer do
-    get 'order/find_orders_by_status'
-    end
-  end
-
-  namespace :api do
-  namespace :buyer do
-    get 'order/find_tmr_order'
-    end
-  end
-
-  namespace :buyer do
-    get 'account/index'
-  end
-
-  namespace :buyer do
-    get 'account/basic_info'
-  end
-
-  namespace :buyer do
-    get 'account/pw'
-  end
-
-  namespace :buyer do
-    get 'account/payment'
-  end
-
-  namespace :api do
-    namespace :buyer do
-      get 'account/index'
-    end
-  end
-
-  namespace :api do
-    namespace :buyer do
-      get 'account/basic_info'
-    end
-  end
-
-  namespace :api do
-    namespace :buyer do
-      get 'account/pw'
-    end
-  end
-
-  namespace :api do
-    namespace :buyer do
-      get 'account/payment'
-    end
-  end
-
-  namespace :api do
-    namespace :buyer do
-      get 'address/find_user_addresses'
-    end
-  end
-
-  namespace :api do
-    namespace :buyer do
-      get 'address/find_address_detail'
-    end
-  end
-
-  namespace :api do
-    namespace :buyer do
-      get 'address/update_address'
-    end
-  end
-
-  namespace :api do
-    namespace :buyer do
-      get 'address/insert_address'
-    end
-  end
-
-  namespace :api do
-    namespace :buyer do
-      get 'address/deete_address'
-    end
-  end
-
-  namespace :buyer do
-    get 'address/address_list'
-  end
-
-  namespace :buyer do
-    get 'address/address_detail'
-  end
-
-  namespace :buyer do
-    get 'item/item_detail'
-  end
-
-  namespace :buyer do
-    get 'categories/index'
-  end
-
-  namespace :buyer do
-    get 'categories/show_by_cat'
-  end
-
-  namespace :buyer do
-    get 'categories/show_by_sub_cat'
-  end
-
-  namespace :buyer do
-    get 'categories/show_favor'
-  end
-
-  namespace :buyer do
-    get 'cart/index'
-  end
-
-  namespace :seller do
   end
 
   namespace :seller do
@@ -169,6 +40,7 @@ Rails.application.routes.draw do
 
   get 'login/login'
   root 'login#login'
+  get 'register'=>'login#register'
 
   get '/inventories' => 'seller/inventory#inventory', constraints: IsSeller
   get '/home' => 'seller/inventory#inventory', constraints: IsSeller
@@ -198,8 +70,12 @@ Rails.application.routes.draw do
   get '/account/orders/:status' => 'buyer/account#find_orders_by_status', constraints:IsBuyer
   get '/tmr_order' => 'buyer/account#find_tmr_order', constraints:IsBuyer
   get '/history_order' => 'buyer/account#find_orders_by_status', constraints:IsBuyer
-  get '/order_details/:order_id' => 'buyer/account#find_order_details'
-  get '/payment/:order_id' => 'buyer/payment#payment'
+  get '/order_details/:order_id' => 'buyer/account#find_order_details' , constraints:IsBuyer
+  get '/payment/:order_id' => 'buyer/payment#payment', constraints:IsBuyer
+  get '/payment_callback/:order_id' => 'buyer/payment#payment_callback' , constraints:IsBuyer
+  get '/feedback/:order_id' => 'buyer/account#feedback', constraints:IsBuyer
+  get '/submit_details' => 'buyer/account#feedback'
+  get '/registered_direct/:id/:hash' => 'api/buyer/register#registered_redirect_to'
 
 
 
@@ -233,6 +109,7 @@ Rails.application.routes.draw do
       get 'find_frequent_item/:cat_id' => 'item_list#find_frequent_item';
       get 'find_item_by_sub_cat/:sub_cat_id' => 'item_list#find_item_by_sub_cat';
       get 'item/:item_id' => 'item_list#find_item_detail';
+      get 'find_province' => 'address#find_province';
       get 'find_city/:province_id' => 'address#find_city_by_province_id';
       get 'find_district/:city_id' => 'address#find_district_by_city_id';
       get 'find_street/:district_id' => 'address#find_street_by_district_id';
@@ -241,12 +118,17 @@ Rails.application.routes.draw do
       get '/history_order' => 'order#history_order'
       get '/find_order_details/:order_id' => 'order#find_order_details'
       get '/find_order_items/:order_id' => 'order#find_order_items'
+      get '/is_registered/:number' => 'register#is_registered'
       post 'set_default_address' =>   'address#set_default';
       post 'add_to_cart' => 'item_list#add_to_cart';
       post 'update_address' => 'address#update_address';
       delete 'delete_from_cart/:id' => 'cart#delete_item'
       post 'cancel_order' => 'order#cancel_order';
+      post 'confirm_order' => 'order#confirm_order';
       put 'create_order' => 'cart#create_order';
+      put '/sendComment' => 'order#add_comment'
+      put '/register' => 'register#register'
+
 
 
     end

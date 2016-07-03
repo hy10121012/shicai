@@ -1,0 +1,14 @@
+<div ng-controller="commentCtrl" class="payment" style="background-color: #FFFFFF;" ng-init="init(<%=@order_id%>)">
+  <div class="payment__title" style="margin-bottom: 20px;">请给您的这次采购打分</div>
+  <div class="raiting-row"><input type="radio" ng-model="rating" value="1"> 一星 <input type="radio" ng-model="rating" value="2"> 二星 <input type="radio" ng-model="rating" value="3"> 三星 <input type="radio" ng-model="rating" value="4"> 四星 <input type="radio" ng-model="rating" value="5"> 五星</div>
+  <div class="raiting-row"></div>
+  <div class="raiting-row"></div>
+  <div class="raiting-row"></div>
+  <div class="raiting-row"></div>
+  <div class="raiting-row"><textarea placeholder="请输入您的评语" ng-model="comment" style="width: 80%;height: 100px;">请输入您的评语</textarea></div>
+  <div class="raiting-row"><input type="button" value="提交" class="confirm_button" ng-click="sendComment()" /></div>
+
+
+</div>
+
+

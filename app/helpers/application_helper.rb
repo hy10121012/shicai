@@ -10,10 +10,16 @@ module ApplicationHelper
 
   def showSearch
     params[:controller] =='buyer/home' && params[:action]=='index'
-
   end
 
+  def showRegister
+    params[:controller] =='buyer/login' && params[:action]=='register'
+  end
 
+  def is_verified
+    u = User.find session[:user_id]
+    return u.is_verified
+  end
 
 
 end

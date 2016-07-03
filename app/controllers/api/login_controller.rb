@@ -21,6 +21,7 @@ class Api::LoginController < ApplicationController
       puts 'login success'
       session[:user_id]=user.id
       session[:user_type] = user.user_type
+      session[:user_name] = user.name
       token = user.token
     end
     result = {"status"=>status,"token"=>token}

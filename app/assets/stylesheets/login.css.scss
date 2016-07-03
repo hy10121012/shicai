@@ -1,15 +1,14 @@
 // Place all the styles related to the login controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import "include_share";
 
-
-
-.seller-login {
+.login {
   height: 100%;
   background-color: white;
 }
 
-.seller-login__header {
+.login__header {
   height: 100%;
   position: absolute;
   width: 100%;
@@ -21,7 +20,7 @@
 
 }
 
-.seller-login__logo {
+.login__logo {
   width: 100px;
   height: 100px;
   margin: 0 auto;
@@ -30,16 +29,16 @@
   background-image: url("/img/logo.png");
 }
 
-.seller-login__container {
+.login__container {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  height:100%;
+  height: 100%;
   background-size: cover;
 }
 
-.seller-login__form {
+.login__form {
   background-color: rgba(0, 0, 0, 0.7);
   width: 300px;
   padding: 15px;
@@ -47,10 +46,10 @@
 
 }
 
-.seller-login__input {
+.login__input {
   width: 100%;
   background-color: rgba(0, 0, 0, 0);
-  border:0px;
+  border: 0px;
   border-bottom: 1px solid #FFFFFF;
   border-radius: 0px;
   margin-top: 10px;
@@ -59,17 +58,17 @@
   color: #FFFFFF;
 }
 
-.seller-login__buttons {
+.login__buttons {
   display: flex;
   justify-content: space-between;
   padding-top: 10px;
 }
 
-.seller-login__button {
+.login__button {
   width: 100%;
 }
 
-.seller-login__button--forgot-password {
+.login__button--forgot-password {
   display: inline-block;
   padding: 10px;
   text-align: center;
@@ -81,7 +80,7 @@
   width: 100px;
 }
 
-.seller-login__button--submit {
+.login__button--submit {
   display: inline-block;
   padding: 12px;
   text-align: center;
@@ -92,3 +91,76 @@
   background-color: #cc6666;
   color: white;
 }
+
+.register {
+  @include page-content;
+
+  &-container {
+    padding: 5px;
+  }
+
+  &-container-row {
+    height: 50px;
+    display: flex;
+    border-bottom: 1px solid #ececec;
+  }
+
+  &-cell {
+    padding-right: 10px;
+    vertical-align: text-bottom;
+    justify-content: center;
+    height: 50px;
+    line-height: 50px;
+    min-width: 20%;
+
+  }
+
+  &-text_field {
+    width: 100%;
+    padding: 0px;
+    line-height: 40px;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 0px;
+  }
+
+  &-confirm_button {
+    padding: 10px 5px;
+    text-align: center;
+    border-radius: 2px;
+    font-size: 14px;
+    line-height: 14px;
+    font-weight: normal;
+    width: 50%;
+    box-sizing: border-box;
+    border: 1px solid #3699D0;
+    background-color: #3699D0;
+    color: white;
+  }
+  &-diabled_button {
+    padding: 10px 5px;
+    text-align: center;
+    border-radius: 2px;
+    font-size: 14px;
+    line-height: 14px;
+    font-weight: normal;
+    width: 50%;
+    box-sizing: border-box;
+    border: 1px solid #828282;
+    background-color: #9b9b9b;
+    color: white;
+  }
+
+  &-dropdown{
+    display: inline-block;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+}
+
+
+
+

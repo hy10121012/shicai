@@ -32,6 +32,8 @@
   &__item-description {
     font-size: 12px;
     color: $grey;
+    overflow: hidden;
+    height: calc(100% - 18px);
   }
 
   &__seller {
